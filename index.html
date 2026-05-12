@@ -443,6 +443,114 @@
     }
     .email-copy-btn:hover { background: rgba(174,205,199,0.7); }
 
+    /* =====================================================
+       MUSIC PLAYER
+    ====================================================== */
+    #music-player {
+      position: fixed;
+      top: 20px;
+      right: 16px;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      background: rgba(45, 98, 106, 0.88);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 0.5px solid rgba(174,205,199,0.30);
+      border-radius: 28px;
+      padding: 8px 14px 8px 10px;
+      box-shadow:
+        0 8px 32px rgba(45,98,106,0.28),
+        0 2px 8px rgba(45,98,106,0.18),
+        inset 0 0.5px 0 rgba(174,205,199,0.20);
+      transition: all 0.3s ease;
+    }
+    #music-player.expanded {
+      border-radius: 20px;
+    }
+    #music-toggle {
+      background: none;
+      border: none;
+      cursor: pointer;
+      width: 32px; height: 32px;
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      transition: background 0.2s;
+      flex-shrink: 0;
+    }
+    #music-toggle:hover { background: rgba(174,205,199,0.18); }
+    #music-toggle .material-icons-round {
+      font-size: 18px;
+      color: #f0f1c7;
+      transition: transform 0.3s;
+    }
+    #music-info {
+      display: flex;
+      flex-direction: column;
+      gap: 1px;
+      overflow: hidden;
+      max-width: 0;
+      opacity: 0;
+      transition: max-width 0.4s ease, opacity 0.3s ease;
+    }
+    #music-player.expanded #music-info {
+      max-width: 180px;
+      opacity: 1;
+    }
+    #music-title {
+      font-size: 11px;
+      font-weight: 500;
+      color: #f0f1c7;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    #music-artist {
+      font-size: 9px;
+      letter-spacing: 0.06em;
+      color: rgba(174,205,199,0.7);
+      white-space: nowrap;
+    }
+    #music-bars {
+      display: flex;
+      align-items: flex-end;
+      gap: 2px;
+      height: 14px;
+      flex-shrink: 0;
+    }
+    #music-bars span {
+      display: block;
+      width: 3px;
+      background: rgba(174,205,199,0.7);
+      border-radius: 2px;
+      animation: bar-bounce 0.9s ease-in-out infinite alternate;
+    }
+    #music-bars span:nth-child(1) { height: 6px;  animation-delay: 0s;    animation-duration: 0.7s; }
+    #music-bars span:nth-child(2) { height: 12px; animation-delay: 0.15s; animation-duration: 0.9s; }
+    #music-bars span:nth-child(3) { height: 8px;  animation-delay: 0.3s;  animation-duration: 0.8s; }
+    #music-bars span:nth-child(4) { height: 14px; animation-delay: 0.1s;  animation-duration: 1.0s; }
+    #music-bars.paused span { animation-play-state: paused; }
+    @keyframes bar-bounce {
+      from { transform: scaleY(0.3); }
+      to   { transform: scaleY(1); }
+    }
+    #volume-btn {
+      background: none;
+      border: none;
+      cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+      padding: 0;
+      flex-shrink: 0;
+      transition: opacity 0.2s;
+    }
+    #volume-btn .material-icons-round {
+      font-size: 15px;
+      color: rgba(174,205,199,0.65);
+      transition: color 0.2s;
+    }
+    #volume-btn:hover .material-icons-round { color: #f0f1c7; }
+
     @media (max-width: 440px) {
       .page { padding: 18px 12px 120px; }
       .hero { padding: 32px 18px 28px; }
@@ -758,6 +866,33 @@
   </button>
 </nav>
 
+<!-- MUSIC PLAYER -->
+<div id="music-player">
+  <button id="music-toggle" onclick="toggleMusic()" title="Play / Pause">
+    <span class="material-icons-round" id="music-icon">music_note</span>
+  </button>
+  <div id="music-bars" class="paused">
+    <span></span><span></span><span></span><span></span>
+  </div>
+  <div id="music-info">
+    <div id="music-title">If I Can Stop One Heart From Breaking</div>
+    <div id="music-artist">Robin · HOYO-MiX · Chevy</div>
+  </div>
+  <button id="volume-btn" onclick="toggleMute()" title="Mute / Unmute">
+    <span class="material-icons-round" id="volume-icon">volume_up</span>
+  </button>
+</div>
+
+<!-- Audio element — drop your audio file here -->
+<audio id="bg-music" loop>
+  <!--
+    Place your audio file (mp3/ogg) in the same folder as this HTML,
+    then update the src below, e.g.:
+    <source src="if-i-can-stop-one-heart.mp3" type="audio/mpeg">
+  -->
+  <source src="if-i-can-stop-one-heart.mp3" type="audio/mpeg">
+</audio>
+
 <!-- EMAIL POPUP -->
 <div id="email-popup">
   <div class="email-popup-label">email</div>
@@ -830,7 +965,50 @@ document.addEventListener('click', () => {
   document.getElementById('email-popup').style.display = 'none';
 });
 
-renderVerses();
+// ── MUSIC PLAYER ──────────────────────────────────────
+const audio     = document.getElementById('bg-music');
+const icon      = document.getElementById('music-icon');
+const bars      = document.getElementById('music-bars');
+const volIcon   = document.getElementById('volume-icon');
+const player    = document.getElementById('music-player');
+let playing     = false;
+let infoTimeout = null;
+
+function setPlaying(state) {
+  playing = state;
+  if (playing) {
+    audio.play();
+    icon.textContent = 'pause';
+    bars.classList.remove('paused');
+    player.classList.add('expanded');
+    clearTimeout(infoTimeout);
+    infoTimeout = setTimeout(() => player.classList.remove('expanded'), 3500);
+  } else {
+    audio.pause();
+    icon.textContent = 'music_note';
+    bars.classList.add('paused');
+    player.classList.remove('expanded');
+  }
+}
+
+function toggleMusic() {
+  setPlaying(!playing);
+}
+
+function toggleMute() {
+  audio.muted = !audio.muted;
+  volIcon.textContent = audio.muted ? 'volume_off' : 'volume_up';
+}
+
+// Attempt autoplay on first user interaction with the page
+document.addEventListener('click', function tryAutoplay() {
+  if (!playing) setPlaying(true);
+  document.removeEventListener('click', tryAutoplay);
+}, { once: true });
+
+// Also try immediately (works if browser allows)
+audio.volume = 0.5;
+audio.play().then(() => { playing = true; icon.textContent = 'pause'; bars.classList.remove('paused'); }).catch(() => {});
 </script>
 </body>
 </html>
