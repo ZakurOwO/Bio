@@ -275,9 +275,9 @@
     }
 
     /* =====================================================
-       POEMS
+       VERSES
     ====================================================== */
-    .poem-card {
+    .verse-card {
       border-left: none;
       border-top: 2px solid var(--c2);
       border-radius: 10px;
@@ -286,14 +286,14 @@
       text-align: center;
       transition: border-color 0.2s;
     }
-    .poem-card:last-of-type { margin-bottom: 0; }
-    .poem-card:hover { border-color: var(--c4); }
-    .poem-text {
+    .verse-card:last-of-type { margin-bottom: 0; }
+    .verse-card:hover { border-color: var(--c4); }
+    .verse-text {
       font-family: 'Cormorant Garamond', serif;
       font-style: italic; font-size: 19px;
       color: var(--text); line-height: 1.75; margin-bottom: 8px;
     }
-    .poem-meta { font-size: 13px; color: var(--text-soft); }
+    .verse-meta { font-size: 13px; color: var(--text-soft); }
 
     /* =====================================================
        CONTACT
@@ -401,6 +401,48 @@
     .about-interest:hover { transform: translateY(-2px); background: rgba(174,205,199,0.52); }
     .about-interest .material-icons-round { font-size: 15px; color: var(--c3); }
 
+    /* =====================================================
+       EMAIL POPUP
+    ====================================================== */
+    #email-popup {
+      display: none;
+      position: fixed;
+      background: #dde0b8;
+      border: 0.5px solid var(--c1);
+      border-radius: 14px;
+      padding: 14px 20px;
+      z-index: 200;
+      box-shadow: 0 8px 30px rgba(45,98,106,0.20);
+      text-align: center;
+      min-width: 240px;
+    }
+    .email-popup-label {
+      font-size: 9px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--text-soft);
+      margin-bottom: 8px;
+    }
+    .email-popup-address {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 16px;
+      color: var(--text);
+      letter-spacing: 0.04em;
+      margin-bottom: 10px;
+    }
+    .email-copy-btn {
+      background: rgba(174,205,199,0.4);
+      border: 0.5px solid var(--c1);
+      border-radius: 8px;
+      padding: 5px 14px;
+      font-size: 11px;
+      color: var(--text);
+      cursor: pointer;
+      font-family: 'DM Sans', sans-serif;
+      transition: background 0.2s;
+    }
+    .email-copy-btn:hover { background: rgba(174,205,199,0.7); }
+
     @media (max-width: 440px) {
       .page { padding: 18px 12px 120px; }
       .hero { padding: 32px 18px 28px; }
@@ -436,7 +478,7 @@
       <button class="home-link-btn" onclick="showTab('skills')">skills &amp; stack</button>
       <button class="home-link-btn" onclick="showTab('projects')">projects</button>
       <button class="home-link-btn" onclick="showTab('achievements')">achievements</button>
-      <button class="home-link-btn" onclick="showTab('verses')">poems</button>
+      <button class="home-link-btn" onclick="showTab('verses')">unsaid thoughts</button>
       <button class="home-link-btn" onclick="showTab('contact')">contact</button>
     </div>
   </div>
@@ -481,7 +523,7 @@
     </div>
 
     <div class="section-card">
-      <div class="section-label">tools & platforms</div>
+      <div class="section-label">tools &amp; platforms</div>
       <div class="tech-grid">
         <span class="tech-tag">
           <span class="tech-icon">📱</span>
@@ -517,20 +559,13 @@
       <!-- Trophy / Hackathon -->
       <div class="award-card">
         <svg class="award-illus" viewBox="0 0 52 52" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <!-- soft blob bg -->
           <ellipse cx="26" cy="27" rx="22" ry="20" fill="#aecdc7" opacity="0.35"/>
-          <!-- cup body -->
           <path d="M18 14 C18 14 16 22 18 27 C20 32 26 34 26 34 C26 34 32 32 34 27 C36 22 34 14 34 14 Z" fill="#428a91" opacity="0.85"/>
-          <!-- cup shine -->
           <path d="M21 17 C21 17 20 22 21.5 26" stroke="#f0f1c7" stroke-width="1.5" stroke-linecap="round" opacity="0.5"/>
-          <!-- handles -->
           <path d="M18 18 C14 18 13 24 18 24" stroke="#2d626a" stroke-width="1.8" fill="none" stroke-linecap="round"/>
           <path d="M34 18 C38 18 39 24 34 24" stroke="#2d626a" stroke-width="1.8" fill="none" stroke-linecap="round"/>
-          <!-- stem -->
           <rect x="24" y="34" width="4" height="5" rx="1.5" fill="#2d626a" opacity="0.7"/>
-          <!-- base -->
           <rect x="20" y="39" width="12" height="3" rx="1.5" fill="#2d626a" opacity="0.7"/>
-          <!-- star -->
           <path d="M26 19 L27 22 L30 22 L28 24 L29 27 L26 25 L23 27 L24 24 L22 22 L25 22 Z" fill="#f0f1c7" opacity="0.9"/>
         </svg>
         <div>
@@ -543,14 +578,10 @@
       <div class="award-card">
         <svg class="award-illus" viewBox="0 0 52 52" fill="none" xmlns="http://www.w3.org/2000/svg">
           <ellipse cx="26" cy="27" rx="22" ry="20" fill="#6f9c97" opacity="0.25"/>
-          <!-- ribbon left -->
           <path d="M22 14 L20 26 L26 23 Z" fill="#428a91" opacity="0.7"/>
-          <!-- ribbon right -->
           <path d="M30 14 L32 26 L26 23 Z" fill="#2d626a" opacity="0.7"/>
-          <!-- medal circle -->
           <circle cx="26" cy="32" r="10" fill="#aecdc7" stroke="#428a91" stroke-width="1"/>
           <circle cx="26" cy="32" r="7.5" fill="#c4dbd8" stroke="#6f9c97" stroke-width="0.5"/>
-          <!-- "1" numeral -->
           <text x="26" y="36.5" text-anchor="middle" font-family="Cormorant Garamond, serif" font-size="11" font-weight="700" fill="#2d626a">1</text>
         </svg>
         <div>
@@ -563,17 +594,12 @@
       <div class="award-card">
         <svg class="award-illus" viewBox="0 0 52 52" fill="none" xmlns="http://www.w3.org/2000/svg">
           <ellipse cx="26" cy="27" rx="22" ry="20" fill="#aecdc7" opacity="0.28"/>
-          <!-- scroll body -->
           <rect x="14" y="16" width="24" height="22" rx="3" fill="#dde8e6" stroke="#6f9c97" stroke-width="0.8"/>
-          <!-- scroll top curl -->
           <ellipse cx="26" cy="16" rx="12" ry="3" fill="#aecdc7" stroke="#6f9c97" stroke-width="0.7"/>
-          <!-- scroll bottom curl -->
           <ellipse cx="26" cy="38" rx="12" ry="3" fill="#aecdc7" stroke="#6f9c97" stroke-width="0.7"/>
-          <!-- lines of text -->
           <line x1="19" y1="22" x2="33" y2="22" stroke="#6f9c97" stroke-width="1" stroke-linecap="round" opacity="0.7"/>
           <line x1="19" y1="26" x2="33" y2="26" stroke="#6f9c97" stroke-width="1" stroke-linecap="round" opacity="0.5"/>
           <line x1="19" y1="30" x2="28" y2="30" stroke="#6f9c97" stroke-width="1" stroke-linecap="round" opacity="0.4"/>
-          <!-- checkmark seal -->
           <circle cx="33" cy="31" r="5" fill="#428a91"/>
           <path d="M30.5 31 L32.2 33 L35.5 29" stroke="#f0f1c7" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
         </svg>
@@ -611,11 +637,11 @@
     </div>
   </div>
 
-  <!-- POEMS -->
+  <!-- VERSES -->
   <div class="tab-panel" id="tab-verses">
     <div class="section-card">
-      <div class="section-label">poems</div>
-      <div id="poems-container"></div>
+      <div class="section-label">unsaid thoughts</div>
+      <div id="verses-container"></div>
     </div>
   </div>
 
@@ -654,8 +680,8 @@
 
     <div class="about-block">
       <div class="section-label">who i am</div>
-      <p>Hi! I'm Zakuro. A 21-year-old transgirl surviving life, despair living in the Philippines, and the quiet growth of becoming who I was always meant to be.</p>
-      <p>I'm drawn to melancholy the way some people are drawn to light. I find beauty in the bittersweet, in songs that make you feel too much, in poems that say what words can't quite hold.</p>
+      <p>Hi! I'm Zakuro. A 21-year-old transgirl surviving life, despite living in the Philippines, and the quiet growth of becoming who I was always meant to be.</p>
+      <p>I'm drawn to melancholy the way some people are drawn to light. I find beauty in the bittersweet, in songs that make you feel too much, in unsaid thoughts that say what words can't quite hold.</p>
     </div>
 
     <div class="about-block">
@@ -687,7 +713,7 @@
     <div class="about-block">
       <div class="section-label">things i love</div>
       <div class="about-interests">
-        <span class="about-interest"><span class="material-icons-round">edit</span> Writing Poems</span>
+        <span class="about-interest"><span class="material-icons-round">edit</span> Unsaid Thoughts</span>
         <span class="about-interest"><span class="material-icons-round">music_note</span> Music</span>
         <span class="about-interest"><span class="material-icons-round">videogame_asset</span> Star Rail</span>
         <span class="about-interest"><span class="material-icons-round">sports_esports</span> Valorant</span>
@@ -724,7 +750,7 @@
   </button>
   <button class="tab-btn" onclick="showTab('verses')" id="btn-verses">
     <span class="material-icons-round">edit_note</span>
-    <span class="tab-label">poems</span>
+    <span class="tab-label">thoughts</span>
   </button>
   <button class="tab-btn" onclick="showTab('contact')" id="btn-contact">
     <span class="material-icons-round">chat_bubble_outline</span>
@@ -732,22 +758,11 @@
   </button>
 </nav>
 
-<!-- EMAIL POPUP — positioned dynamically above the clicked button -->
-<div id="email-popup" style="
-  display: none;
-  position: fixed;
-  background: #dde0b8;
-  border: 0.5px solid #aecdc7;
-  border-radius: 14px;
-  padding: 14px 20px;
-  z-index: 200;
-  box-shadow: 0 8px 30px rgba(45,98,106,0.20);
-  text-align: center;
-  min-width: 240px;
-">
-  <div style="font-size:9px;letter-spacing:0.2em;text-transform:uppercase;color:#6f9c97;margin-bottom:8px;">email</div>
-  <div style="font-family:'Cormorant Garamond',serif;font-size:16px;color:#2d626a;letter-spacing:0.04em;margin-bottom:10px;">zakurotakana@gmail.com</div>
-  <button onclick="copyEmail()" id="copy-btn" style="background:rgba(174,205,199,0.4);border:0.5px solid #aecdc7;border-radius:8px;padding:5px 14px;font-size:11px;color:#2d626a;cursor:pointer;font-family:'DM Sans',sans-serif;transition:background 0.2s;">copy</button>
+<!-- EMAIL POPUP -->
+<div id="email-popup">
+  <div class="email-popup-label">email</div>
+  <div class="email-popup-address">zakurotakana@gmail.com</div>
+  <button class="email-copy-btn" onclick="copyEmail()" id="copy-btn">copy</button>
 </div>
 
 <script>
@@ -759,7 +774,7 @@ function showTab(name) {
   window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
-const POEMS = [
+const VERSES = [
   { text: "Who am I when no one is watching, when the mask falls and the performance ends? In the quiet, stripped of roles and reflections, what remains of me? And if even that feels unfamiliar — then who am I becoming?", date: "mar 3, 2026" },
   { text: "If love is the most beautiful thing we can feel, why does it carry the power to destroy us?", date: "mar 19, 2026" },
   { text: "Would I dare to know it all, even if that knowledge is the first step toward my own unraveling? What if the truth isn't meant to be understood, but endured — something that doesn't enlighten, only erases?", date: "apr 1, 2026" },
@@ -770,17 +785,17 @@ const POEMS = [
   { text: "Every beautiful thing has only ever taught me how to grieve it. I am so tired of being the one left behind — of being the ellipsis at the end of someone else's story.", date: "apr 7, 2026" },
 ];
 
-function renderPoems() {
-  const c = document.getElementById('poems-container');
-  if (!POEMS.length) {
-    c.innerHTML = '<p style="font-size:16px;color:var(--text-soft);font-style:italic;font-family:Cormorant Garamond,serif;padding:10px 0;">no verses yet.</p>';
+function renderVerses() {
+  const c = document.getElementById('verses-container');
+  if (!VERSES.length) {
+    c.innerHTML = '<p style="font-size:16px;color:var(--text-soft);font-style:italic;font-family:Cormorant Garamond,serif;padding:10px 0;">no unsaid thoughts yet.</p>';
     return;
   }
-  const sorted = [...POEMS].sort((a, b) => new Date(a.date) - new Date(b.date));
-  c.innerHTML = sorted.map(p => `
-    <div class="poem-card">
-      <p class="poem-text">"${p.text}"</p>
-      <div class="poem-meta">${p.date}</div>
+  const sorted = [...VERSES].sort((a, b) => new Date(a.date) - new Date(b.date));
+  c.innerHTML = sorted.map(v => `
+    <div class="verse-card">
+      <p class="verse-text">"${v.text}"</p>
+      <div class="verse-meta">${v.date}</div>
     </div>
   `).join('');
 }
@@ -791,12 +806,7 @@ function toggleEmailPopup(e) {
   const btn = e.currentTarget;
   const rect = btn.getBoundingClientRect();
   const popupW = 240;
-
-  // Position above the button
-  const top = rect.top - 10; // will be set via bottom offset
   const left = rect.left + rect.width / 2 - popupW / 2;
-
-  // Clamp to viewport edges
   const clampedLeft = Math.max(8, Math.min(left, window.innerWidth - popupW - 8));
 
   popup.style.bottom = (window.innerHeight - rect.top + 10) + 'px';
@@ -804,7 +814,6 @@ function toggleEmailPopup(e) {
   popup.style.top = 'auto';
   popup.style.transform = 'none';
   popup.style.animation = 'fadeUp 0.2s ease both';
-
   popup.style.display = popup.style.display === 'block' ? 'none' : 'block';
 }
 
@@ -821,7 +830,7 @@ document.addEventListener('click', () => {
   document.getElementById('email-popup').style.display = 'none';
 });
 
-renderPoems();
+renderVerses();
 </script>
 </body>
 </html>
