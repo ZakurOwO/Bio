@@ -490,11 +490,6 @@
       flex-direction: column;
       gap: 1px;
       overflow: hidden;
-      max-width: 0;
-      opacity: 0;
-      transition: max-width 0.4s ease, opacity 0.3s ease;
-    }
-    #music-player.expanded #music-info {
       max-width: 180px;
       opacity: 1;
     }
@@ -788,8 +783,8 @@
 
     <div class="about-block">
       <div class="section-label">who i am</div>
-      <p>Hi! I'm Zakuro. A 21-year-old transgirl surviving life, despite living in the Philippines, and the quiet growth of becoming who I was always meant to be.</p>
-      <p>I'm drawn to melancholy the way some people are drawn to light. I find beauty in the bittersweet, in songs that make you feel too much, in unsaid thoughts that say what words can't quite hold.</p>
+      <p>hi, i'm zakuro. transgirl, 21, from the Philippines.</p>
+      <p>i'm into IT and i spend most of my time listening to moody music — Joji and that kind of stuff. the type of songs you play when you just want to feel something.</p>
     </div>
 
     <div class="about-block">
@@ -972,7 +967,6 @@ const bars      = document.getElementById('music-bars');
 const volIcon   = document.getElementById('volume-icon');
 const player    = document.getElementById('music-player');
 let playing     = false;
-let infoTimeout = null;
 
 function setPlaying(state) {
   playing = state;
@@ -980,14 +974,10 @@ function setPlaying(state) {
     audio.play();
     icon.textContent = 'pause';
     bars.classList.remove('paused');
-    player.classList.add('expanded');
-    clearTimeout(infoTimeout);
-    infoTimeout = setTimeout(() => player.classList.remove('expanded'), 3500);
   } else {
     audio.pause();
     icon.textContent = 'music_note';
     bars.classList.add('paused');
-    player.classList.remove('expanded');
   }
 }
 
@@ -1009,6 +999,8 @@ document.addEventListener('click', function tryAutoplay() {
 // Also try immediately (works if browser allows)
 audio.volume = 0.5;
 audio.play().then(() => { playing = true; icon.textContent = 'pause'; bars.classList.remove('paused'); }).catch(() => {});
+
+renderVerses();
 </script>
 </body>
 </html>
