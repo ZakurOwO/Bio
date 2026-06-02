@@ -3,25 +3,37 @@
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="Zakuro — IT student, developer, and writer from the Philippines. Explore my projects, skills, and unsaid thoughts."/>
+
+  <!-- Open Graph / Discord / Twitter card -->
+  <meta property="og:type"        content="website"/>
+  <meta property="og:title"       content="Zakuro"/>
+  <meta property="og:description" content="IT student, developer, and writer from the Philippines."/>
+  <meta property="og:image"       content="HGTEFtFX0AAUyGA.jfif"/>
+  <meta name="twitter:card"       content="summary"/>
+  <meta name="twitter:site"       content="@Zakurow130"/>
+  <meta name="twitter:title"      content="Zakuro"/>
+  <meta name="twitter:description" content="IT student, developer, and writer from the Philippines."/>
+  <meta name="twitter:image"      content="HGTEFtFX0AAUyGA.jfif"/>
+
   <title>Zakuro</title>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet"/>
   <style>
     :root {
-      --bg:         #f0f1c7;
-      --c1:         #aecdc7;
-      --c2:         #6f9c97;
-      --c3:         #428a91;
-      --c4:         #2d626a;
-      --card-bg:    rgba(240,241,199,0.60);
-      --border:     #aecdc7;
-      --text:       #2d626a;
-      --text-mid:   #428a91;
-      --text-soft:  #6f9c97;
+      --bg:        #f0f1c7;
+      --c1:        #aecdc7;
+      --c2:        #6f9c97;
+      --c3:        #428a91;
+      --c4:        #2d626a;
+      --card-bg:   rgba(240,241,199,0.60);
+      --border:    #aecdc7;
+      --text:      #2d626a;
+      --text-mid:  #428a91;
+      --text-soft: #6f9c97;
     }
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     html { scroll-behavior: smooth; }
-
     body {
       background: var(--bg);
       font-family: 'DM Sans', sans-serif;
@@ -29,530 +41,314 @@
       min-height: 100vh;
       padding: 0 0 40px;
     }
-
-    /* subtle dot pattern */
     body::before {
       content: '';
-      position: fixed;
-      inset: 0;
+      position: fixed; inset: 0;
       background-image:
         radial-gradient(circle, #aecdc7 1px, transparent 1px),
         radial-gradient(circle, #6f9c97 1px, transparent 1px);
       background-size: 60px 60px, 97px 97px;
       background-position: 0 0, 30px 30px;
-      opacity: 0.10;
-      pointer-events: none;
-      z-index: 0;
+      opacity: 0.10; pointer-events: none; z-index: 0;
     }
 
     .page { max-width: 480px; margin: 0 auto; position: relative; z-index: 1; padding: 28px 16px 120px; text-align: center; }
 
-    /* =====================================================
-       FLOATING NAV PILL — centered, above bottom
-    ====================================================== */
-    #tab-bar {
-      position: fixed;
-      bottom: 28px;
-      left: 50%;
-      transform: translateX(-50%);
-      z-index: 100;
-      display: flex;
-      gap: 4px;
-      background: rgba(45, 98, 106, 0.88);
-      backdrop-filter: blur(16px);
-      -webkit-backdrop-filter: blur(16px);
-      border: 0.5px solid rgba(174,205,199,0.30);
-      border-radius: 28px;
-      padding: 7px 10px;
-      box-shadow:
-        0 8px 32px rgba(45,98,106,0.28),
-        0 2px 8px rgba(45,98,106,0.18),
-        inset 0 0.5px 0 rgba(174,205,199,0.20);
-    }
+    /* ── HERO ENTRANCE ANIMATION ── */
+    .hero-enter { animation: heroIn 0.7s cubic-bezier(0.22,1,0.36,1) both; }
+    .hero-enter .avatar-ring { animation: avatarPop 0.6s cubic-bezier(0.34,1.56,0.64,1) 0.15s both; }
+    .hero-enter h1  { animation: fadeSlide 0.5s ease 0.3s both; }
+    .hero-enter .tagline { animation: fadeSlide 0.5s ease 0.4s both; }
+    .hero-enter .bio     { animation: fadeSlide 0.5s ease 0.5s both; }
+    .hero-enter .visitor-pill { animation: fadeSlide 0.5s ease 0.6s both; }
+    .home-links-enter { animation: fadeUp 0.5s ease 0.55s both; }
 
-    .tab-btn {
-      background: none;
-      border: none;
-      cursor: pointer;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 2px;
-      padding: 7px 10px;
-      border-radius: 22px;
-      transition: background 0.22s, transform 0.15s;
-      font-family: 'DM Sans', sans-serif;
-      min-width: 46px;
+    @keyframes heroIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to   { opacity: 1; transform: translateY(0); }
     }
-    .tab-btn:hover {
-      background: rgba(174,205,199,0.18);
-      transform: translateY(-1px);
+    @keyframes avatarPop {
+      from { opacity: 0; transform: scale(0.7); }
+      to   { opacity: 1; transform: scale(1); }
     }
-    .tab-btn.active {
-      background: rgba(174,205,199,0.26);
+    @keyframes fadeSlide {
+      from { opacity: 0; transform: translateY(10px); }
+      to   { opacity: 1; transform: translateY(0); }
     }
-    .tab-btn .material-icons-round {
-      font-size: 22px;
-      color: rgba(174,205,199,0.65);
-      transition: color 0.22s, transform 0.22s;
-    }
-    .tab-btn.active .material-icons-round {
-      color: #f0f1c7;
-    }
-    .tab-btn:hover .material-icons-round {
-      color: rgba(240,241,199,0.85);
-      transform: translateY(-1px);
-    }
-    .tab-label {
-      font-size: 9px;
-      letter-spacing: 0.07em;
-      color: rgba(174,205,199,0.6);
-      text-transform: lowercase;
-      transition: color 0.22s;
-    }
-    .tab-btn.active .tab-label {
-      color: #f0f1c7;
-      font-weight: 500;
-    }
-
-    /* =====================================================
-       TAB PANELS
-    ====================================================== */
-    .tab-panel { display: none; }
-    .tab-panel.active { display: block; animation: fadeUp 0.35s ease both; }
-
     @keyframes fadeUp {
       from { opacity: 0; transform: translateY(14px); }
       to   { opacity: 1; transform: translateY(0); }
     }
 
-    /* =====================================================
-       HERO
-    ====================================================== */
+    /* ── AUTOPLAY HINT ── */
+    #autoplay-hint {
+      position: fixed; bottom: 88px; left: 50%;
+      transform: translateX(-50%);
+      z-index: 99;
+      background: rgba(45,98,106,0.82);
+      backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+      border: 0.5px solid rgba(174,205,199,0.30);
+      border-radius: 20px; padding: 8px 18px;
+      font-size: 12px; color: rgba(240,241,199,0.85);
+      letter-spacing: 0.06em; pointer-events: none;
+      animation: hintFade 3.5s ease forwards; white-space: nowrap;
+    }
+    @keyframes hintFade {
+      0%   { opacity: 0; transform: translateX(-50%) translateY(6px); }
+      20%  { opacity: 1; transform: translateX(-50%) translateY(0); }
+      75%  { opacity: 1; }
+      100% { opacity: 0; transform: translateX(-50%) translateY(-4px); }
+    }
+
+    /* ── FLOATING NAV PILL ── */
+    #tab-bar {
+      position: fixed; bottom: 28px; left: 50%; transform: translateX(-50%);
+      z-index: 100; display: flex; gap: 4px;
+      background: rgba(45,98,106,0.88);
+      backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
+      border: 0.5px solid rgba(174,205,199,0.30);
+      border-radius: 28px; padding: 7px 10px;
+      box-shadow: 0 8px 32px rgba(45,98,106,0.28), 0 2px 8px rgba(45,98,106,0.18), inset 0 0.5px 0 rgba(174,205,199,0.20);
+    }
+    .tab-btn {
+      background: none; border: none; cursor: pointer;
+      display: flex; flex-direction: column; align-items: center; gap: 2px;
+      padding: 7px 10px; border-radius: 22px;
+      transition: background 0.22s, transform 0.15s;
+      font-family: 'DM Sans', sans-serif; min-width: 46px;
+    }
+    .tab-btn:hover { background: rgba(174,205,199,0.18); transform: translateY(-1px); }
+    .tab-btn.active { background: rgba(174,205,199,0.26); }
+    .tab-btn .material-icons-round { font-size: 22px; color: rgba(174,205,199,0.65); transition: color 0.22s, transform 0.22s; }
+    .tab-btn.active .material-icons-round { color: #f0f1c7; }
+    .tab-btn:hover .material-icons-round { color: rgba(240,241,199,0.85); transform: translateY(-1px); }
+    .tab-label { font-size: 9px; letter-spacing: 0.07em; color: rgba(174,205,199,0.6); text-transform: lowercase; transition: color 0.22s; }
+    .tab-btn.active .tab-label { color: #f0f1c7; font-weight: 500; }
+
+    /* ── TAB PANELS ── */
+    .tab-panel { display: none; }
+    .tab-panel.active { display: block; animation: fadeUp 0.35s ease both; }
+
+    /* ── HERO ── */
     .hero {
       background: linear-gradient(150deg, #aecdc7 0%, #c4d9d6 45%, #dddfc0 100%);
-      border-radius: 20px;
-      padding: 48px 28px 36px;
-      text-align: center;
-      border: 0.5px solid var(--border);
-      margin-bottom: 14px;
+      border-radius: 20px; padding: 48px 28px 36px; text-align: center;
+      border: 0.5px solid var(--border); margin-bottom: 14px;
       box-shadow: 0 4px 24px rgba(45,98,106,0.10);
     }
     .avatar-ring {
-      width: 150px; height: 150px;
-      border-radius: 50%;
+      width: 150px; height: 150px; border-radius: 50%;
       border: 1.5px solid var(--c2);
       display: flex; align-items: center; justify-content: center;
-      background: rgba(240,241,199,0.25);
-      margin: 0 auto 20px;
+      background: rgba(240,241,199,0.25); margin: 0 auto 20px;
     }
-    .avatar-inner {
-      width: 130px; height: 130px;
-      border-radius: 50%; overflow: hidden;
-      background: linear-gradient(135deg, #aecdc7, #6f9c97);
-    }
+    .avatar-inner { width: 130px; height: 130px; border-radius: 50%; overflow: hidden; background: linear-gradient(135deg, #aecdc7, #6f9c97); }
     .avatar-inner img { width: 100%; height: 100%; object-fit: cover; }
-
-    .hero h1 {
-      font-family: 'Cormorant Garamond', serif;
-      font-weight: 300; font-size: 30px;
-      letter-spacing: 0.22em; text-transform: uppercase;
-      color: var(--text); margin-bottom: 6px;
-    }
+    .hero h1 { font-family: 'Cormorant Garamond', serif; font-weight: 300; font-size: 30px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--text); margin-bottom: 6px; }
     .hero .tagline { font-size: 14px; color: var(--text-mid); letter-spacing: 0.08em; margin-bottom: 14px; }
     .dot { display: inline-block; width: 4px; height: 4px; background: var(--c2); border-radius: 50%; margin: 0 6px; vertical-align: middle; opacity: 0.7; }
-    .hero .bio {
-      font-family: 'Cormorant Garamond', serif;
-      font-style: italic; font-size: 20px;
-      color: var(--text-mid); line-height: 1.7;
-      max-width: 320px; margin: 0 auto;
+    .hero .bio { font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 20px; color: var(--text-mid); line-height: 1.7; max-width: 320px; margin: 0 auto 18px; }
+
+    /* ── VISITOR COUNTER ── */
+    .visitor-pill {
+      display: inline-flex; align-items: center; gap: 7px;
+      background: rgba(45,98,106,0.12); border: 0.5px solid rgba(45,98,106,0.22);
+      border-radius: 20px; padding: 6px 14px;
+      font-size: 12px; color: var(--text-mid); letter-spacing: 0.05em; margin-bottom: 18px;
     }
+    .visitor-pill .material-icons-round { font-size: 14px; color: var(--c3); }
+    .visitor-count { font-family: 'Cormorant Garamond', serif; font-size: 16px; font-weight: 400; color: var(--text); min-width: 18px; display: inline-block; }
+    .visitor-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--c3); opacity: 0.7; animation: pulse-dot 2s ease-in-out infinite; flex-shrink: 0; }
+    @keyframes pulse-dot { 0%,100%{opacity:.4;transform:scale(1)} 50%{opacity:.9;transform:scale(1.3)} }
+
+    /* ── CURRENTLY SECTION ── */
+    .currently-grid { display: flex; flex-direction: column; gap: 8px; }
+    .currently-row {
+      display: flex; align-items: center; gap: 12px;
+      background: rgba(174,205,199,0.20);
+      border: 0.5px solid var(--c1);
+      border-radius: 12px; padding: 11px 14px;
+      text-align: left;
+    }
+    .currently-icon { font-size: 20px; flex-shrink: 0; width: 28px; text-align: center; }
+    .currently-label { font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--text-soft); margin-bottom: 2px; }
+    .currently-val { font-family: 'Cormorant Garamond', serif; font-size: 17px; color: var(--text); line-height: 1.3; }
+    .currently-val em { font-size: 13px; color: var(--text-soft); font-style: normal; }
+    .last-updated { font-size: 11px; color: var(--text-soft); letter-spacing: 0.08em; margin-top: 10px; text-align: right; }
 
     /* quick-links */
-    .home-links {
-      display: flex; gap: 8px; flex-wrap: wrap; justify-content: center;
-      margin-top: 0;
-    }
+    .home-links { display: flex; gap: 8px; flex-wrap: wrap; justify-content: center; }
     .home-link-btn {
-      background: var(--card-bg);
-      border: 0.5px solid var(--border);
-      border-radius: 12px;
-      padding: 10px 18px;
-      font-size: 13px; color: var(--text);
-      cursor: pointer; font-family: 'DM Sans', sans-serif;
+      background: var(--card-bg); border: 0.5px solid var(--border);
+      border-radius: 12px; padding: 10px 18px;
+      font-size: 13px; color: var(--text); cursor: pointer;
+      font-family: 'DM Sans', sans-serif;
       transition: background 0.18s, transform 0.15s, box-shadow 0.15s;
-      letter-spacing: 0.04em;
-      box-shadow: 0 2px 8px rgba(45,98,106,0.08);
+      letter-spacing: 0.04em; box-shadow: 0 2px 8px rgba(45,98,106,0.08);
     }
-    .home-link-btn:hover {
-      background: rgba(174,205,199,0.45);
-      transform: translateY(-2px);
-      box-shadow: 0 4px 14px rgba(45,98,106,0.15);
-    }
+    .home-link-btn:hover { background: rgba(174,205,199,0.45); transform: translateY(-2px); box-shadow: 0 4px 14px rgba(45,98,106,0.15); }
 
-    /* =====================================================
-       SHARED SECTION
-    ====================================================== */
-    .section-card {
-      background: var(--card-bg);
-      border: 0.5px solid var(--c1);
-      border-radius: 16px;
-      padding: 20px 22px;
-      margin-bottom: 12px;
-      backdrop-filter: blur(4px);
-      box-shadow: 0 2px 12px rgba(45,98,106,0.07);
-    }
-    .section-label {
-      font-size: 11px; letter-spacing: 0.22em;
-      text-transform: uppercase; color: var(--text-soft);
-      margin-bottom: 14px;
-      display: flex; align-items: center; gap: 10px;
-      justify-content: center;
-    }
-    .section-label::before { content: ''; flex: 1; height: 0.5px; background: var(--c1); }
-    .section-label::after  { content: ''; flex: 1; height: 0.5px; background: var(--c1); }
+    /* ── SHARED SECTION ── */
+    .section-card { background: var(--card-bg); border: 0.5px solid var(--c1); border-radius: 16px; padding: 20px 22px; margin-bottom: 12px; backdrop-filter: blur(4px); box-shadow: 0 2px 12px rgba(45,98,106,0.07); }
+    .section-label { font-size: 11px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--text-soft); margin-bottom: 14px; display: flex; align-items: center; gap: 10px; justify-content: center; }
+    .section-label::before { content:''; flex:1; height:0.5px; background:var(--c1); }
+    .section-label::after  { content:''; flex:1; height:0.5px; background:var(--c1); }
 
-    /* =====================================================
-       SKILLS
-    ====================================================== */
+    /* ── SKILLS ── */
     .tech-grid { display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; }
-    .tech-tag {
-      background: rgba(174,205,199,0.35);
-      border: 0.5px solid var(--border);
-      border-radius: 14px; padding: 14px 20px;
-      color: var(--text);
-      transition: transform 0.15s, background 0.15s, box-shadow 0.15s; cursor: default;
-      box-shadow: 0 1px 4px rgba(45,98,106,0.07);
-      display: flex; flex-direction: column; align-items: center; gap: 7px;
-      min-width: 90px;
-    }
+    .tech-tag { background: rgba(174,205,199,0.35); border: 0.5px solid var(--border); border-radius: 14px; padding: 14px 20px; color: var(--text); transition: transform 0.15s, background 0.15s, box-shadow 0.15s; cursor: default; box-shadow: 0 1px 4px rgba(45,98,106,0.07); display: flex; flex-direction: column; align-items: center; gap: 7px; min-width: 90px; }
     .tech-tag:hover { transform: translateY(-3px); background: rgba(174,205,199,0.58); box-shadow: 0 4px 14px rgba(45,98,106,0.14); }
     .tech-icon { font-size: 26px; line-height: 1; }
     .tech-name { font-size: 13px; font-weight: 500; letter-spacing: 0.03em; color: var(--text); }
 
-    /* =====================================================
-       ACHIEVEMENTS
-    ====================================================== */
-    .award-card {
-      background: rgba(240,241,199,0.45);
-      border: 0.5px solid var(--c1);
-      border-radius: 14px; padding: 14px 18px; margin-bottom: 10px;
-      display: flex; align-items: center; gap: 14px;
-      transition: transform 0.18s, box-shadow 0.18s;
-      position: relative; overflow: hidden;
-    }
-    .award-card::before {
-      content: '';
-      position: absolute; inset: 0;
-      background: linear-gradient(120deg, rgba(174,205,199,0.15) 0%, transparent 60%);
-      pointer-events: none;
-    }
+    /* ── ACHIEVEMENTS ── */
+    .award-card { background: rgba(240,241,199,0.45); border: 0.5px solid var(--c1); border-radius: 14px; padding: 14px 18px; margin-bottom: 10px; display: flex; align-items: center; gap: 14px; transition: transform 0.18s, box-shadow 0.18s; position: relative; overflow: hidden; }
+    .award-card::before { content:''; position:absolute; inset:0; background:linear-gradient(120deg,rgba(174,205,199,0.15) 0%,transparent 60%); pointer-events:none; }
     .award-card:last-child { margin-bottom: 0; }
     .award-card:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(45,98,106,0.12); }
     .award-illus { width: 52px; height: 52px; flex-shrink: 0; }
     .award-title { font-size: 15px; font-weight: 500; text-align: left; }
     .award-sub { font-size: 12px; color: var(--text-soft); margin-top: 2px; text-align: left; }
 
-    /* =====================================================
-       PROJECTS
-    ====================================================== */
-    .project-card {
-      background: rgba(240,241,199,0.45);
-      border: 0.5px solid var(--c1);
-      border-radius: 10px; padding: 14px 16px; margin-bottom: 8px;
-      transition: transform 0.15s, box-shadow 0.15s;
-      text-align: center;
-    }
+    /* ── PROJECTS ── */
+    .project-card { background: rgba(240,241,199,0.45); border: 0.5px solid var(--c1); border-radius: 10px; padding: 14px 16px; margin-bottom: 8px; transition: transform 0.15s, box-shadow 0.15s; text-align: center; }
     .project-card:last-child { margin-bottom: 0; }
     .project-card:hover { transform: translateY(-2px); box-shadow: 0 4px 16px rgba(45,98,106,0.12); }
     .project-name { font-size: 15px; font-weight: 500; margin-bottom: 4px; }
     .project-desc { font-size: 13px; color: var(--text-mid); line-height: 1.6; margin-bottom: 9px; }
-    .project-tags { display: flex; gap: 5px; flex-wrap: wrap; justify-content: center; }
-    .project-tag {
-      background: rgba(174,205,199,0.38);
-      border-radius: 5px; padding: 3px 9px;
-      font-size: 12px; color: var(--text);
+    .project-tags { display: flex; gap: 5px; flex-wrap: wrap; justify-content: center; margin-bottom: 9px; }
+    .project-tag { background: rgba(174,205,199,0.38); border-radius: 5px; padding: 3px 9px; font-size: 12px; color: var(--text); }
+    .project-links { display: flex; gap: 6px; justify-content: center; flex-wrap: wrap; }
+    .project-link {
+      display: inline-flex; align-items: center; gap: 5px;
+      background: rgba(45,98,106,0.10); border: 0.5px solid rgba(45,98,106,0.22);
+      border-radius: 8px; padding: 5px 12px;
+      font-size: 12px; color: var(--text); text-decoration: none;
+      font-family: 'DM Sans', sans-serif; letter-spacing: 0.03em;
+      transition: background 0.18s, transform 0.12s;
     }
+    .project-link .material-icons-round { font-size: 14px; color: var(--c3); }
+    .project-link:hover { background: rgba(45,98,106,0.18); transform: translateY(-1px); }
+    .progress-bar-wrap { flex:1; height:4px; background:rgba(45,98,106,0.12); border-radius:4px; overflow:hidden; }
+    .progress-bar-fill { height:100%; background:linear-gradient(90deg,var(--c2),var(--c3)); border-radius:4px; transition:width 0.8s ease; }
+    .progress-label { font-size:11px; color:var(--text-soft); flex-shrink:0; }
+    .project-progress { display:flex; align-items:center; gap:8px; margin-bottom:9px; }
 
-    /* =====================================================
-       VERSES
-    ====================================================== */
-    .verse-card {
-      border-left: none;
-      border-top: 2px solid var(--c2);
-      border-radius: 10px;
-      padding: 14px 16px; margin-bottom: 12px;
-      background: rgba(240,241,199,0.35);
-      text-align: center;
-      transition: border-color 0.2s;
-    }
-    .verse-card:last-of-type { margin-bottom: 0; }
-    .verse-card:hover { border-color: var(--c4); }
-    .verse-text {
-      font-family: 'Cormorant Garamond', serif;
-      font-style: italic; font-size: 19px;
-      color: var(--text); line-height: 1.75; margin-bottom: 8px;
-    }
-    .verse-meta { font-size: 13px; color: var(--text-soft); }
+    /* ── VERSES ── */
+    .verse-notice { background:rgba(45,98,106,0.08); border:0.5px solid rgba(45,98,106,0.18); border-radius:10px; padding:10px 14px; margin-bottom:14px; font-size:12px; color:var(--text-mid); line-height:1.6; display:flex; gap:8px; align-items:flex-start; text-align:left; }
+    .verse-notice .material-icons-round { font-size:15px; flex-shrink:0; margin-top:1px; opacity:0.7; }
+    .verse-card { border-top:2px solid var(--c2); border-radius:10px; padding:14px 16px; margin-bottom:12px; background:rgba(240,241,199,0.35); text-align:center; transition:border-color 0.2s; }
+    .verse-card:last-of-type { margin-bottom:0; }
+    .verse-card:hover { border-color:var(--c4); }
+    .verse-text { font-family:'Cormorant Garamond',serif; font-style:italic; font-size:19px; color:var(--text); line-height:1.75; margin-bottom:8px; }
+    .verse-meta { font-size:13px; color:var(--text-soft); }
 
-    /* =====================================================
-       CONTACT
-    ====================================================== */
-    .contact-card {
-      background: var(--card-bg);
-      border: 0.5px solid var(--c1);
-      border-radius: 16px; padding: 24px 22px; text-align: center;
-      margin-bottom: 12px;
+    /* ── VERSE ADMIN PANEL ── */
+    #admin-trigger { font-size:10px; color:rgba(45,98,106,0.25); letter-spacing:0.1em; cursor:pointer; margin-top:16px; user-select:none; transition:color 0.2s; }
+    #admin-trigger:hover { color:var(--text-soft); }
+    #admin-panel {
+      display:none; margin-top:14px;
+      background:rgba(45,98,106,0.06); border:0.5px solid rgba(45,98,106,0.20);
+      border-radius:14px; padding:16px;
+      animation: fadeUp 0.25s ease both;
     }
-    .social-links { display: flex; justify-content: center; gap: 8px; flex-wrap: wrap; margin-bottom: 0; }
-    .social-btn {
-      background: rgba(174,205,199,0.28);
-      border: 0.5px solid var(--border);
-      border-radius: 10px; padding: 9px 20px;
-      font-size: 13px; color: var(--text);
-      text-decoration: none; letter-spacing: 0.04em;
-      transition: background 0.2s, transform 0.15s;
-      cursor: pointer; font-family: 'DM Sans', sans-serif;
-      display: flex; align-items: center; gap: 6px;
+    #admin-panel.open { display:block; }
+    .admin-label { font-size:10px; letter-spacing:0.18em; text-transform:uppercase; color:var(--text-soft); margin-bottom:6px; text-align:left; }
+    .admin-textarea {
+      width:100%; min-height:80px; resize:vertical;
+      background:rgba(240,241,199,0.6); border:0.5px solid var(--c1);
+      border-radius:8px; padding:10px 12px;
+      font-family:'Cormorant Garamond',serif; font-size:16px; font-style:italic;
+      color:var(--text); outline:none;
+      transition:border-color 0.2s;
     }
-    .social-btn .material-icons-round { font-size: 16px; color: var(--c3); }
-    .social-btn:hover { background: rgba(174,205,199,0.55); transform: translateY(-2px); }
-    .footer-note {
-      margin-top: 16px; font-size: 16px; color: var(--text-soft);
-      letter-spacing: 0.06em; font-style: italic;
-      font-family: 'Cormorant Garamond', serif;
+    .admin-textarea:focus { border-color:var(--c3); }
+    .admin-row { display:flex; gap:8px; margin-top:8px; align-items:center; }
+    .admin-input {
+      flex:1; background:rgba(240,241,199,0.6); border:0.5px solid var(--c1);
+      border-radius:8px; padding:8px 12px;
+      font-family:'DM Sans',sans-serif; font-size:13px; color:var(--text); outline:none;
     }
+    .admin-input:focus { border-color:var(--c3); }
+    .admin-btn {
+      background:rgba(45,98,106,0.15); border:0.5px solid rgba(45,98,106,0.30);
+      border-radius:8px; padding:8px 16px;
+      font-size:12px; color:var(--text); cursor:pointer;
+      font-family:'DM Sans',sans-serif; letter-spacing:0.04em;
+      transition:background 0.18s;
+    }
+    .admin-btn:hover { background:rgba(45,98,106,0.28); }
+    .admin-btn.danger { background:rgba(180,60,60,0.10); border-color:rgba(180,60,60,0.25); color:#8a3a3a; }
+    .admin-btn.danger:hover { background:rgba(180,60,60,0.22); }
+    #admin-pw-wrap { display:flex; gap:8px; justify-content:center; margin-bottom:12px; }
+    #admin-pw { text-align:center; width:160px; letter-spacing:0.1em; }
+    #admin-pw-error { font-size:11px; color:#9a4040; margin-top:4px; display:none; }
+    .verse-delete-btn { font-size:11px; color:rgba(140,60,60,0.5); background:none; border:none; cursor:pointer; margin-top:5px; font-family:'DM Sans',sans-serif; transition:color 0.2s; }
+    .verse-delete-btn:hover { color:rgba(140,60,60,0.9); }
+    .verse-card-admin { display:flex; flex-direction:column; align-items:center; }
 
-    /* =====================================================
-       ABOUT ME
-    ====================================================== */
-    .about-hero {
-      background: linear-gradient(150deg, #aecdc7 0%, #c4d9d6 45%, #dddfc0 100%);
-      border-radius: 16px; padding: 28px 24px;
-      margin-bottom: 12px;
-      border: 0.5px solid var(--border);
-      box-shadow: 0 4px 24px rgba(45,98,106,0.10);
-    }
-    .about-avatar-wrap {
-      width: 80px; height: 80px; border-radius: 50%;
-      border: 1.5px solid var(--c2);
-      overflow: hidden; margin: 0 auto 14px;
-      background: linear-gradient(135deg, #aecdc7, #6f9c97);
-    }
-    .about-avatar-wrap img { width: 100%; height: 100%; object-fit: cover; }
-    .about-name {
-      font-family: 'Cormorant Garamond', serif;
-      font-weight: 300; font-size: 22px;
-      letter-spacing: 0.18em; text-transform: uppercase;
-      color: var(--text); margin-bottom: 4px;
-    }
-    .about-role {
-      font-size: 12px; color: var(--text-mid);
-      letter-spacing: 0.1em; margin-bottom: 0;
-    }
+    /* ── CONTACT ── */
+    .contact-card { background:var(--card-bg); border:0.5px solid var(--c1); border-radius:16px; padding:24px 22px; text-align:center; margin-bottom:12px; }
+    .social-links { display:flex; justify-content:center; gap:8px; flex-wrap:wrap; }
+    .social-btn { background:rgba(174,205,199,0.28); border:0.5px solid var(--border); border-radius:10px; padding:9px 20px; font-size:13px; color:var(--text); text-decoration:none; letter-spacing:0.04em; transition:background 0.2s,transform 0.15s; cursor:pointer; font-family:'DM Sans',sans-serif; display:flex; align-items:center; gap:6px; }
+    .social-btn .material-icons-round { font-size:16px; color:var(--c3); }
+    .social-btn:hover { background:rgba(174,205,199,0.55); transform:translateY(-2px); }
+    .footer-note { margin-top:16px; font-size:16px; color:var(--text-soft); letter-spacing:0.06em; font-style:italic; font-family:'Cormorant Garamond',serif; }
 
-    .about-block {
-      background: var(--card-bg);
-      border: 0.5px solid var(--c1);
-      border-radius: 16px; padding: 20px 22px;
-      margin-bottom: 12px;
-      backdrop-filter: blur(4px);
-      box-shadow: 0 2px 12px rgba(45,98,106,0.07);
-    }
-    .about-block:last-child { margin-bottom: 0; }
-    .about-block p {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 18px; line-height: 1.75;
-      color: var(--text-mid); font-style: italic;
-    }
-    .about-block p + p { margin-top: 10px; }
+    /* ── ABOUT ── */
+    .about-hero { background:linear-gradient(150deg,#aecdc7 0%,#c4d9d6 45%,#dddfc0 100%); border-radius:16px; padding:28px 24px; margin-bottom:12px; border:0.5px solid var(--border); box-shadow:0 4px 24px rgba(45,98,106,0.10); }
+    .about-avatar-wrap { width:80px; height:80px; border-radius:50%; border:1.5px solid var(--c2); overflow:hidden; margin:0 auto 14px; background:linear-gradient(135deg,#aecdc7,#6f9c97); }
+    .about-avatar-wrap img { width:100%; height:100%; object-fit:cover; }
+    .about-name { font-family:'Cormorant Garamond',serif; font-weight:300; font-size:22px; letter-spacing:0.18em; text-transform:uppercase; color:var(--text); margin-bottom:4px; }
+    .about-role { font-size:12px; color:var(--text-mid); letter-spacing:0.1em; }
+    .about-block { background:var(--card-bg); border:0.5px solid var(--c1); border-radius:16px; padding:20px 22px; margin-bottom:12px; backdrop-filter:blur(4px); box-shadow:0 2px 12px rgba(45,98,106,0.07); }
+    .about-block:last-child { margin-bottom:0; }
+    .about-block p { font-family:'Cormorant Garamond',serif; font-size:18px; line-height:1.75; color:var(--text-mid); font-style:italic; }
+    .about-block p + p { margin-top:10px; }
+    .about-facts { display:grid; grid-template-columns:1fr 1fr; gap:8px; }
+    .about-fact { background:rgba(174,205,199,0.22); border:0.5px solid var(--c1); border-radius:12px; padding:12px 10px; text-align:center; }
+    .about-fact-icon { font-size:20px; margin-bottom:4px; }
+    .about-fact-label { font-size:10px; letter-spacing:0.14em; text-transform:uppercase; color:var(--text-soft); margin-bottom:3px; }
+    .about-fact-val { font-family:'Cormorant Garamond',serif; font-size:15px; font-weight:400; color:var(--text); }
+    .about-interests { display:flex; flex-wrap:wrap; gap:8px; justify-content:center; }
+    .about-interest { background:rgba(174,205,199,0.30); border:0.5px solid var(--border); border-radius:20px; padding:7px 16px; font-size:13px; color:var(--text); display:flex; align-items:center; gap:6px; transition:transform 0.15s,background 0.15s; }
+    .about-interest:hover { transform:translateY(-2px); background:rgba(174,205,199,0.52); }
+    .about-interest .material-icons-round { font-size:15px; color:var(--c3); }
 
-    .about-facts {
-      display: grid; grid-template-columns: 1fr 1fr;
-      gap: 8px; margin-bottom: 0;
-    }
-    .about-fact {
-      background: rgba(174,205,199,0.22);
-      border: 0.5px solid var(--c1);
-      border-radius: 12px; padding: 12px 14px;
-      text-align: center;
-    }
-    .about-fact-icon { font-size: 20px; margin-bottom: 4px; }
-    .about-fact-label {
-      font-size: 10px; letter-spacing: 0.14em;
-      text-transform: uppercase; color: var(--text-soft);
-      margin-bottom: 3px;
-    }
-    .about-fact-val {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 16px; font-weight: 400;
-      color: var(--text);
-    }
+    /* ── EMAIL POPUP ── */
+    #email-popup { display:none; position:fixed; background:#dde0b8; border:0.5px solid var(--c1); border-radius:14px; padding:14px 20px; z-index:200; box-shadow:0 8px 30px rgba(45,98,106,0.20); text-align:center; min-width:240px; }
+    .email-popup-label { font-size:9px; letter-spacing:0.2em; text-transform:uppercase; color:var(--text-soft); margin-bottom:8px; }
+    .email-popup-address { font-family:'Cormorant Garamond',serif; font-size:16px; color:var(--text); letter-spacing:0.04em; margin-bottom:10px; }
+    .email-copy-btn { background:rgba(174,205,199,0.4); border:0.5px solid var(--c1); border-radius:8px; padding:5px 14px; font-size:11px; color:var(--text); cursor:pointer; font-family:'DM Sans',sans-serif; transition:background 0.2s; }
+    .email-copy-btn:hover { background:rgba(174,205,199,0.7); }
 
-    .about-interests { display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; }
-    .about-interest {
-      background: rgba(174,205,199,0.30);
-      border: 0.5px solid var(--border);
-      border-radius: 20px; padding: 7px 16px;
-      font-size: 13px; color: var(--text);
-      display: flex; align-items: center; gap: 6px;
-      transition: transform 0.15s, background 0.15s;
-    }
-    .about-interest:hover { transform: translateY(-2px); background: rgba(174,205,199,0.52); }
-    .about-interest .material-icons-round { font-size: 15px; color: var(--c3); }
+    /* ── MUSIC PLAYER ── */
+    #music-player { position:fixed; top:20px; right:16px; z-index:100; display:flex; align-items:center; gap:10px; background:rgba(45,98,106,0.88); backdrop-filter:blur(16px); -webkit-backdrop-filter:blur(16px); border:0.5px solid rgba(174,205,199,0.30); border-radius:28px; padding:8px 14px 8px 10px; box-shadow:0 8px 32px rgba(45,98,106,0.28),0 2px 8px rgba(45,98,106,0.18),inset 0 0.5px 0 rgba(174,205,199,0.20); }
+    #music-toggle { background:none; border:none; cursor:pointer; width:32px; height:32px; border-radius:50%; display:flex; align-items:center; justify-content:center; transition:background 0.2s; flex-shrink:0; }
+    #music-toggle:hover { background:rgba(174,205,199,0.18); }
+    #music-toggle .material-icons-round { font-size:18px; color:#f0f1c7; }
+    #music-info { display:flex; flex-direction:column; gap:1px; overflow:hidden; max-width:180px; }
+    #music-title { font-size:11px; font-weight:500; color:#f0f1c7; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+    #music-artist { font-size:9px; letter-spacing:0.06em; color:rgba(174,205,199,0.7); white-space:nowrap; }
+    #music-bars { display:flex; align-items:flex-end; gap:2px; height:14px; flex-shrink:0; }
+    #music-bars span { display:block; width:3px; background:rgba(174,205,199,0.7); border-radius:2px; animation:bar-bounce 0.9s ease-in-out infinite alternate; }
+    #music-bars span:nth-child(1){height:6px;animation-delay:0s;animation-duration:0.7s}
+    #music-bars span:nth-child(2){height:12px;animation-delay:.15s;animation-duration:.9s}
+    #music-bars span:nth-child(3){height:8px;animation-delay:.3s;animation-duration:.8s}
+    #music-bars span:nth-child(4){height:14px;animation-delay:.1s;animation-duration:1s}
+    #music-bars.paused span { animation-play-state:paused; }
+    @keyframes bar-bounce { from{transform:scaleY(0.3)} to{transform:scaleY(1)} }
+    #volume-btn { background:none; border:none; cursor:pointer; display:flex; align-items:center; justify-content:center; padding:0; flex-shrink:0; }
+    #volume-btn .material-icons-round { font-size:15px; color:rgba(174,205,199,0.65); transition:color 0.2s; }
+    #volume-btn:hover .material-icons-round { color:#f0f1c7; }
 
-    /* =====================================================
-       EMAIL POPUP
-    ====================================================== */
-    #email-popup {
-      display: none;
-      position: fixed;
-      background: #dde0b8;
-      border: 0.5px solid var(--c1);
-      border-radius: 14px;
-      padding: 14px 20px;
-      z-index: 200;
-      box-shadow: 0 8px 30px rgba(45,98,106,0.20);
-      text-align: center;
-      min-width: 240px;
-    }
-    .email-popup-label {
-      font-size: 9px;
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-      color: var(--text-soft);
-      margin-bottom: 8px;
-    }
-    .email-popup-address {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 16px;
-      color: var(--text);
-      letter-spacing: 0.04em;
-      margin-bottom: 10px;
-    }
-    .email-copy-btn {
-      background: rgba(174,205,199,0.4);
-      border: 0.5px solid var(--c1);
-      border-radius: 8px;
-      padding: 5px 14px;
-      font-size: 11px;
-      color: var(--text);
-      cursor: pointer;
-      font-family: 'DM Sans', sans-serif;
-      transition: background 0.2s;
-    }
-    .email-copy-btn:hover { background: rgba(174,205,199,0.7); }
-
-    /* =====================================================
-       MUSIC PLAYER
-    ====================================================== */
-    #music-player {
-      position: fixed;
-      top: 20px;
-      right: 16px;
-      z-index: 100;
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      background: rgba(45, 98, 106, 0.88);
-      backdrop-filter: blur(16px);
-      -webkit-backdrop-filter: blur(16px);
-      border: 0.5px solid rgba(174,205,199,0.30);
-      border-radius: 28px;
-      padding: 8px 14px 8px 10px;
-      box-shadow:
-        0 8px 32px rgba(45,98,106,0.28),
-        0 2px 8px rgba(45,98,106,0.18),
-        inset 0 0.5px 0 rgba(174,205,199,0.20);
-      transition: all 0.3s ease;
-    }
-    #music-player.expanded {
-      border-radius: 20px;
-    }
-    #music-toggle {
-      background: none;
-      border: none;
-      cursor: pointer;
-      width: 32px; height: 32px;
-      border-radius: 50%;
-      display: flex; align-items: center; justify-content: center;
-      transition: background 0.2s;
-      flex-shrink: 0;
-    }
-    #music-toggle:hover { background: rgba(174,205,199,0.18); }
-    #music-toggle .material-icons-round {
-      font-size: 18px;
-      color: #f0f1c7;
-      transition: transform 0.3s;
-    }
-    #music-info {
-      display: flex;
-      flex-direction: column;
-      gap: 1px;
-      overflow: hidden;
-      max-width: 180px;
-      opacity: 1;
-    }
-    #music-title {
-      font-size: 11px;
-      font-weight: 500;
-      color: #f0f1c7;
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
-    }
-    #music-artist {
-      font-size: 9px;
-      letter-spacing: 0.06em;
-      color: rgba(174,205,199,0.7);
-      white-space: nowrap;
-    }
-    #music-bars {
-      display: flex;
-      align-items: flex-end;
-      gap: 2px;
-      height: 14px;
-      flex-shrink: 0;
-    }
-    #music-bars span {
-      display: block;
-      width: 3px;
-      background: rgba(174,205,199,0.7);
-      border-radius: 2px;
-      animation: bar-bounce 0.9s ease-in-out infinite alternate;
-    }
-    #music-bars span:nth-child(1) { height: 6px;  animation-delay: 0s;    animation-duration: 0.7s; }
-    #music-bars span:nth-child(2) { height: 12px; animation-delay: 0.15s; animation-duration: 0.9s; }
-    #music-bars span:nth-child(3) { height: 8px;  animation-delay: 0.3s;  animation-duration: 0.8s; }
-    #music-bars span:nth-child(4) { height: 14px; animation-delay: 0.1s;  animation-duration: 1.0s; }
-    #music-bars.paused span { animation-play-state: paused; }
-    @keyframes bar-bounce {
-      from { transform: scaleY(0.3); }
-      to   { transform: scaleY(1); }
-    }
-    #volume-btn {
-      background: none;
-      border: none;
-      cursor: pointer;
-      display: flex; align-items: center; justify-content: center;
-      padding: 0;
-      flex-shrink: 0;
-      transition: opacity 0.2s;
-    }
-    #volume-btn .material-icons-round {
-      font-size: 15px;
-      color: rgba(174,205,199,0.65);
-      transition: color 0.2s;
-    }
-    #volume-btn:hover .material-icons-round { color: #f0f1c7; }
-
-    @media (max-width: 440px) {
-      .page { padding: 18px 12px 120px; }
-      .hero { padding: 32px 18px 28px; }
-      .section-card { padding: 16px; }
-      .tab-btn { padding: 7px 10px; min-width: 46px; }
-      .tab-label { display: none; }
-      #tab-bar { padding: 7px 8px; }
+    @media(max-width:440px){
+      .page{padding:18px 12px 120px}
+      .hero{padding:32px 18px 28px}
+      .section-card{padding:16px}
+      .tab-btn{padding:7px 10px;min-width:46px}
+      .tab-label{display:none}
+      #tab-bar{padding:7px 8px}
     }
   </style>
 </head>
@@ -562,21 +358,23 @@
 
   <!-- HOME -->
   <div class="tab-panel active" id="tab-home">
-    <div class="hero">
+    <div class="hero hero-enter">
       <div class="avatar-ring">
         <div class="avatar-inner">
           <img src="HGTEFtFX0AAUyGA.jfif" alt="Zakuro"/>
         </div>
       </div>
       <h1>Zakuro</h1>
-      <p class="tagline">
-        IT student <span class="dot"></span> developer <span class="dot"></span> writer
-      </p>
-      <p class="bio">
-        Hello! Welcome to my page. This is just where I show off my work and other stuff. :>
-      </p>
+      <p class="tagline">IT student <span class="dot"></span> developer <span class="dot"></span> writer</p>
+      <p class="bio">Hello! Welcome to my page. I build mobile apps and desktop systems, and write things I'm too afraid to say out loud. :></p>
+      <div class="visitor-pill">
+        <span class="visitor-dot"></span>
+        <span class="material-icons-round">visibility</span>
+        <span id="visitor-count" class="visitor-count">—</span>
+        <span>unique visitors</span>
+      </div>
     </div>
-    <div class="home-links">
+    <div class="home-links home-links-enter">
       <button class="home-link-btn" onclick="showTab('about')">about me</button>
       <button class="home-link-btn" onclick="showTab('skills')">skills &amp; stack</button>
       <button class="home-link-btn" onclick="showTab('projects')">projects</button>
@@ -588,78 +386,42 @@
 
   <!-- SKILLS -->
   <div class="tab-panel" id="tab-skills">
-
     <div class="section-card">
       <div class="section-label">languages</div>
       <div class="tech-grid">
-        <span class="tech-tag">
-          <span class="tech-icon">☕</span>
-          <span class="tech-name">Java</span>
-        </span>
-        <span class="tech-tag">
-          <span class="tech-icon">🐍</span>
-          <span class="tech-name">Python</span>
-        </span>
-        <span class="tech-tag">
-          <span class="tech-icon">⚙️</span>
-          <span class="tech-name">C++</span>
-        </span>
+        <span class="tech-tag"><span class="tech-icon">☕</span><span class="tech-name">Java</span></span>
+        <span class="tech-tag"><span class="tech-icon">🐍</span><span class="tech-name">Python</span></span>
+        <span class="tech-tag"><span class="tech-icon">⚙️</span><span class="tech-name">C++</span></span>
       </div>
     </div>
-
     <div class="section-card">
       <div class="section-label">databases</div>
       <div class="tech-grid">
-        <span class="tech-tag">
-          <span class="tech-icon">🗃️</span>
-          <span class="tech-name">SQL</span>
-        </span>
-        <span class="tech-tag">
-          <span class="tech-icon">📦</span>
-          <span class="tech-name">SQLite</span>
-        </span>
-        <span class="tech-tag">
-          <span class="tech-icon">🖥️</span>
-          <span class="tech-name">Microsoft SQL</span>
-        </span>
+        <span class="tech-tag"><span class="tech-icon">🗃️</span><span class="tech-name">SQL</span></span>
+        <span class="tech-tag"><span class="tech-icon">📦</span><span class="tech-name">SQLite</span></span>
+        <span class="tech-tag"><span class="tech-icon">🖥️</span><span class="tech-name">Microsoft SQL</span></span>
       </div>
     </div>
-
     <div class="section-card">
       <div class="section-label">tools &amp; platforms</div>
       <div class="tech-grid">
-        <span class="tech-tag">
-          <span class="tech-icon">📱</span>
-          <span class="tech-name">Android Studio</span>
-        </span>
-        <span class="tech-tag">
-          <span class="tech-icon">🔧</span>
-          <span class="tech-name">Mobile Dev</span>
-        </span>
+        <span class="tech-tag"><span class="tech-icon">📱</span><span class="tech-name">Android Studio</span></span>
+        <span class="tech-tag"><span class="tech-icon">🔧</span><span class="tech-name">Mobile Dev</span></span>
       </div>
     </div>
-
     <div class="section-card">
       <div class="section-label">design</div>
       <div class="tech-grid">
-        <span class="tech-tag">
-          <span class="tech-icon">🎨</span>
-          <span class="tech-name">Canva</span>
-        </span>
-        <span class="tech-tag">
-          <span class="tech-icon">✏️</span>
-          <span class="tech-name">UI Design</span>
-        </span>
+        <span class="tech-tag"><span class="tech-icon">🎨</span><span class="tech-name">Canva</span></span>
+        <span class="tech-tag"><span class="tech-icon">✏️</span><span class="tech-name">UI Design</span></span>
       </div>
     </div>
-
   </div>
 
   <!-- ACHIEVEMENTS -->
   <div class="tab-panel" id="tab-achievements">
     <div class="section-card">
       <div class="section-label">achievements</div>
-      <!-- Trophy / Hackathon -->
       <div class="award-card">
         <svg class="award-illus" viewBox="0 0 52 52" fill="none" xmlns="http://www.w3.org/2000/svg">
           <ellipse cx="26" cy="27" rx="22" ry="20" fill="#aecdc7" opacity="0.35"/>
@@ -671,13 +433,8 @@
           <rect x="20" y="39" width="12" height="3" rx="1.5" fill="#2d626a" opacity="0.7"/>
           <path d="M26 19 L27 22 L30 22 L28 24 L29 27 L26 25 L23 27 L24 24 L22 22 L25 22 Z" fill="#f0f1c7" opacity="0.9"/>
         </svg>
-        <div>
-          <div class="award-title">Mobile App Hackathon</div>
-          <div class="award-sub">Local Champion</div>
-        </div>
+        <div><div class="award-title">Mobile App Hackathon</div><div class="award-sub">Local Champion</div></div>
       </div>
-
-      <!-- Medal / Runner Up -->
       <div class="award-card">
         <svg class="award-illus" viewBox="0 0 52 52" fill="none" xmlns="http://www.w3.org/2000/svg">
           <ellipse cx="26" cy="27" rx="22" ry="20" fill="#6f9c97" opacity="0.25"/>
@@ -687,13 +444,8 @@
           <circle cx="26" cy="32" r="7.5" fill="#c4dbd8" stroke="#6f9c97" stroke-width="0.5"/>
           <text x="26" y="36.5" text-anchor="middle" font-family="Cormorant Garamond, serif" font-size="11" font-weight="700" fill="#2d626a">1</text>
         </svg>
-        <div>
-          <div class="award-title">Cluster Competition</div>
-          <div class="award-sub">1st Runner Up</div>
-        </div>
+        <div><div class="award-title">Cluster Competition</div><div class="award-sub">1st Runner Up</div></div>
       </div>
-
-      <!-- Scroll / Certificate -->
       <div class="award-card">
         <svg class="award-illus" viewBox="0 0 52 52" fill="none" xmlns="http://www.w3.org/2000/svg">
           <ellipse cx="26" cy="27" rx="22" ry="20" fill="#aecdc7" opacity="0.28"/>
@@ -706,10 +458,7 @@
           <circle cx="33" cy="31" r="5" fill="#428a91"/>
           <path d="M30.5 31 L32.2 33 L35.5 29" stroke="#f0f1c7" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
         </svg>
-        <div>
-          <div class="award-title">Final Exam — Java Fundamentals</div>
-          <div class="award-sub">Completion</div>
-        </div>
+        <div><div class="award-title">Final Exam — Java Fundamentals</div><div class="award-sub">Completion</div></div>
       </div>
     </div>
   </div>
@@ -727,14 +476,28 @@
           <span class="project-tag">SQL</span>
           <span class="project-tag">C++</span>
         </div>
+        <div class="project-links">
+          <a class="project-link" href="https://github.com/ZakurOwO" target="_blank">
+            <span class="material-icons-round">code</span> View on GitHub
+          </a>
+        </div>
       </div>
       <div class="project-card">
-        <div class="project-name">Ligtas <em style="font-size:12px;color:var(--text-soft);">(Coming Soon)</em></div>
-        <div class="project-desc">A mobile app and website currently in development.</div>
+        <div class="project-name">Ligtas <em style="font-size:12px;color:var(--text-soft);">· in progress</em></div>
+        <div class="project-desc">A safety-focused mobile app and companion website currently in active development.</div>
+        <div class="project-progress">
+          <div class="progress-bar-wrap"><div class="progress-bar-fill" style="width:35%"></div></div>
+          <span class="progress-label">~35%</span>
+        </div>
         <div class="project-tags">
           <span class="project-tag">Android Application</span>
           <span class="project-tag">Flutter</span>
           <span class="project-tag">Dart</span>
+        </div>
+        <div class="project-links">
+          <a class="project-link" href="https://github.com/ZakurOwO" target="_blank">
+            <span class="material-icons-round">code</span> Follow on GitHub
+          </a>
         </div>
       </div>
     </div>
@@ -744,7 +507,31 @@
   <div class="tab-panel" id="tab-verses">
     <div class="section-card">
       <div class="section-label">unsaid thoughts</div>
+      <div class="verse-notice">
+        <span class="material-icons-round">info_outline</span>
+        <span>these are personal reflections — some of them are heavy and dark. read with care.</span>
+      </div>
       <div id="verses-container"></div>
+      <!-- hidden admin trigger — tap 5× fast to reveal -->
+      <div id="admin-trigger" onclick="adminTap()">· · ·</div>
+      <div id="admin-panel">
+        <div id="admin-pw-wrap">
+          <input class="admin-input" id="admin-pw" type="password" placeholder="password" style="width:160px;text-align:center;letter-spacing:0.1em"/>
+          <button class="admin-btn" onclick="adminLogin()">unlock</button>
+        </div>
+        <div id="admin-pw-error">wrong password</div>
+        <div id="admin-form" style="display:none">
+          <div class="admin-label">new thought</div>
+          <textarea class="admin-textarea" id="admin-text" placeholder="write something..."></textarea>
+          <div class="admin-row">
+            <input class="admin-input" id="admin-date" type="date"/>
+            <button class="admin-btn" onclick="adminAdd()">add</button>
+          </div>
+          <div style="margin-top:10px;text-align:right">
+            <button class="admin-btn danger" onclick="adminLock()">lock panel</button>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 
@@ -772,47 +559,59 @@
 
   <!-- ABOUT -->
   <div class="tab-panel" id="tab-about">
-
     <div class="about-hero">
-      <div class="about-avatar-wrap">
-        <img src="HGTEFtFX0AAUyGA.jfif" alt="Zakuro"/>
-      </div>
+      <div class="about-avatar-wrap"><img src="HGTEFtFX0AAUyGA.jfif" alt="Zakuro"/></div>
       <div class="about-name">Zakuro</div>
       <div class="about-role">IT student <span class="dot"></span> developer <span class="dot"></span> writer</div>
     </div>
-
     <div class="about-block">
       <div class="section-label">who i am</div>
       <p>hi, i'm zakuro. transgirl, 21, from the Philippines.</p>
       <p>i'm into IT and i spend most of my time listening to moody music — Joji and that kind of stuff. the type of songs you play when you just want to feel something.</p>
     </div>
-
     <div class="about-block">
       <div class="section-label">quick facts</div>
       <div class="about-facts">
-        <div class="about-fact">
-          <div class="about-fact-icon">🏳️‍⚧️</div>
-          <div class="about-fact-label">identity</div>
-          <div class="about-fact-val">Transgirl (MTF)</div>
-        </div>
-        <div class="about-fact">
-          <div class="about-fact-icon">🎂</div>
-          <div class="about-fact-label">age</div>
-          <div class="about-fact-val">21</div>
-        </div>
-        <div class="about-fact">
-          <div class="about-fact-icon">🎓</div>
-          <div class="about-fact-label">studying</div>
-          <div class="about-fact-val">Information Technology</div>
-        </div>
-        <div class="about-fact">
-          <div class="about-fact-icon">📍</div>
-          <div class="about-fact-label">based in</div>
-          <div class="about-fact-val">Philippines</div>
-        </div>
+        <div class="about-fact"><div class="about-fact-icon">🏳️‍⚧️</div><div class="about-fact-label">identity</div><div class="about-fact-val">Transgirl (MTF)</div></div>
+        <div class="about-fact"><div class="about-fact-icon">🎂</div><div class="about-fact-label">age</div><div class="about-fact-val">21</div></div>
+        <div class="about-fact"><div class="about-fact-icon">🎓</div><div class="about-fact-label">studying</div><div class="about-fact-val">IT</div></div>
+        <div class="about-fact"><div class="about-fact-icon">📍</div><div class="about-fact-label">based in</div><div class="about-fact-val">Philippines</div></div>
       </div>
     </div>
-
+    <div class="about-block">
+      <div class="section-label">currently</div>
+      <div class="currently-grid">
+        <div class="currently-row">
+          <div class="currently-icon">🎵</div>
+          <div>
+            <div class="currently-label">listening to</div>
+            <div class="currently-val" id="currently-listening">If I Can Stop One Heart From Breaking <em>· Robin</em></div>
+          </div>
+        </div>
+        <div class="currently-row">
+          <div class="currently-icon">🔨</div>
+          <div>
+            <div class="currently-label">building</div>
+            <div class="currently-val">Ligtas <em>· Flutter mobile app</em></div>
+          </div>
+        </div>
+        <div class="currently-row">
+          <div class="currently-icon">🎮</div>
+          <div>
+            <div class="currently-label">playing</div>
+            <div class="currently-val">Honkai: Star Rail <em>· wishing for Firefly</em></div>
+          </div>
+        </div>
+        <div class="currently-row">
+          <div class="currently-icon">💭</div>
+          <div>
+            <div class="currently-label">feeling</div>
+            <div class="currently-val">somewhere between okay and not</div>
+          </div>
+        </div>
+      </div>
+      <div class="last-updated" id="last-updated-label"></div>
+    </div>
     <div class="about-block">
       <div class="section-label">things i love</div>
       <div class="about-interests">
@@ -824,51 +623,29 @@
         <span class="about-interest"><span class="material-icons-round">self_improvement</span> Transitioning</span>
       </div>
     </div>
-
   </div>
 
 </div><!-- /page -->
 
 <!-- FLOATING TAB BAR -->
 <nav id="tab-bar">
-  <button class="tab-btn active" onclick="showTab('home')" id="btn-home">
-    <span class="material-icons-round">home</span>
-    <span class="tab-label">home</span>
-  </button>
-  <button class="tab-btn" onclick="showTab('about')" id="btn-about">
-    <span class="material-icons-round">person</span>
-    <span class="tab-label">about</span>
-  </button>
-  <button class="tab-btn" onclick="showTab('skills')" id="btn-skills">
-    <span class="material-icons-round">settings</span>
-    <span class="tab-label">skills</span>
-  </button>
-  <button class="tab-btn" onclick="showTab('achievements')" id="btn-achievements">
-    <span class="material-icons-round">emoji_events</span>
-    <span class="tab-label">awards</span>
-  </button>
-  <button class="tab-btn" onclick="showTab('projects')" id="btn-projects">
-    <span class="material-icons-round">folder_open</span>
-    <span class="tab-label">projects</span>
-  </button>
-  <button class="tab-btn" onclick="showTab('verses')" id="btn-verses">
-    <span class="material-icons-round">edit_note</span>
-    <span class="tab-label">thoughts</span>
-  </button>
-  <button class="tab-btn" onclick="showTab('contact')" id="btn-contact">
-    <span class="material-icons-round">chat_bubble_outline</span>
-    <span class="tab-label">contact</span>
-  </button>
+  <button class="tab-btn active" onclick="showTab('home')"         id="btn-home"         title="home">        <span class="material-icons-round">home</span>              <span class="tab-label">home</span></button>
+  <button class="tab-btn"        onclick="showTab('about')"        id="btn-about"        title="about">       <span class="material-icons-round">person</span>            <span class="tab-label">about</span></button>
+  <button class="tab-btn"        onclick="showTab('skills')"       id="btn-skills"       title="skills">      <span class="material-icons-round">settings</span>          <span class="tab-label">skills</span></button>
+  <button class="tab-btn"        onclick="showTab('achievements')" id="btn-achievements" title="awards">      <span class="material-icons-round">emoji_events</span>      <span class="tab-label">awards</span></button>
+  <button class="tab-btn"        onclick="showTab('projects')"     id="btn-projects"     title="projects">    <span class="material-icons-round">folder_open</span>       <span class="tab-label">projects</span></button>
+  <button class="tab-btn"        onclick="showTab('verses')"       id="btn-verses"       title="thoughts">    <span class="material-icons-round">edit_note</span>         <span class="tab-label">thoughts</span></button>
+  <button class="tab-btn"        onclick="showTab('contact')"      id="btn-contact"      title="contact">     <span class="material-icons-round">chat_bubble_outline</span><span class="tab-label">contact</span></button>
 </nav>
+
+<div id="autoplay-hint" style="display:none;">♪ tap anywhere to play music</div>
 
 <!-- MUSIC PLAYER -->
 <div id="music-player">
   <button id="music-toggle" onclick="toggleMusic()" title="Play / Pause">
     <span class="material-icons-round" id="music-icon">music_note</span>
   </button>
-  <div id="music-bars" class="paused">
-    <span></span><span></span><span></span><span></span>
-  </div>
+  <div id="music-bars" class="paused"><span></span><span></span><span></span><span></span></div>
   <div id="music-info">
     <div id="music-title">If I Can Stop One Heart From Breaking</div>
     <div id="music-artist">Robin · HOYO-MiX · Chevy</div>
@@ -878,17 +655,10 @@
   </button>
 </div>
 
-<!-- Audio element — drop your audio file here -->
 <audio id="bg-music" loop>
-  <!--
-    Place your audio file (mp3/ogg) in the same folder as this HTML,
-    then update the src below, e.g.:
-    <source src="if-i-can-stop-one-heart.mp3" type="audio/mpeg">
-  -->
   <source src="if-i-can-stop-one-heart.mp3" type="audio/mpeg">
 </audio>
 
-<!-- EMAIL POPUP -->
 <div id="email-popup">
   <div class="email-popup-label">email</div>
   <div class="email-popup-address">zakurotakana@gmail.com</div>
@@ -896,111 +666,272 @@
 </div>
 
 <script>
+// ─────────────────────────────────────────────────────────
+// TAB NAVIGATION + PAGE TITLE
+// ─────────────────────────────────────────────────────────
+const TAB_TITLES = {
+  home:         'Zakuro',
+  about:        'Zakuro · about',
+  skills:       'Zakuro · skills',
+  achievements: 'Zakuro · achievements',
+  projects:     'Zakuro · projects',
+  verses:       'Zakuro · unsaid thoughts',
+  contact:      'Zakuro · contact',
+};
+
 function showTab(name) {
   document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
   document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
   document.getElementById('tab-' + name).classList.add('active');
   document.getElementById('btn-' + name).classList.add('active');
+  document.title = TAB_TITLES[name] || 'Zakuro';
   window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
-const VERSES = [
-  { text: "Who am I when no one is watching, when the mask falls and the performance ends? In the quiet, stripped of roles and reflections, what remains of me? And if even that feels unfamiliar — then who am I becoming?", date: "mar 3, 2026" },
-  { text: "If love is the most beautiful thing we can feel, why does it carry the power to destroy us?", date: "mar 19, 2026" },
-  { text: "Would I dare to know it all, even if that knowledge is the first step toward my own unraveling? What if the truth isn't meant to be understood, but endured — something that doesn't enlighten, only erases?", date: "apr 1, 2026" },
-  { text: "No. I let it rot the day I lost the love of my life. Whatever was left decayed quietly until there was nothing worth saving. Since then, everyone has reduced to passing shadows, empty noise in a world that never cared.", date: "apr 2, 2026" },
-  { text: "Take me into dreams so deep they swallow what remains of me — where silence erases my name, and even waking becomes a forgotten sin.", date: "apr 3, 2026" },
-  { text: "To hear someone scream my name again, to be held tightly and told that they will never let go. To be truly understood — to look into someone's eyes again without doubt, without waiting for the moment it all falls apart.", date: "apr 7, 2026" },
-  { text: "I don't look people in the eyes anymore — I only see the ways they will leave, the quiet countdown behind every smile, the expiration date stamped on everything that feels warm and good.", date: "apr 7, 2026" },
-  { text: "Every beautiful thing has only ever taught me how to grieve it. I am so tired of being the one left behind — of being the ellipsis at the end of someone else's story.", date: "apr 7, 2026" },
+// ─────────────────────────────────────────────────────────
+// LAST UPDATED LABEL
+// ─────────────────────────────────────────────────────────
+(function() {
+  const UPDATED = '2026-06-03'; // ← update this date whenever you change "currently"
+  const [y,m,d] = UPDATED.split('-').map(Number);
+  const months = ['jan','feb','mar','apr','may','jun','jul','aug','sep','oct','nov','dec'];
+  document.getElementById('last-updated-label').textContent =
+    'last updated ' + months[m-1] + ' ' + d + ', ' + y;
+})();
+
+// ─────────────────────────────────────────────────────────
+// VERSES — hardcoded base + localStorage extras
+// ─────────────────────────────────────────────────────────
+const BASE_VERSES = [
+  { text: "Who am I when no one is watching, when the mask falls and the performance ends? In the quiet, stripped of roles and reflections, what remains of me? And if even that feels unfamiliar — then who am I becoming?", date: "2026-03-03" },
+  { text: "If love is the most beautiful thing we can feel, why does it carry the power to destroy us?", date: "2026-03-19" },
+  { text: "Would I dare to know it all, even if that knowledge is the first step toward my own unraveling? What if the truth isn't meant to be understood, but endured — something that doesn't enlighten, only erases?", date: "2026-04-01" },
+  { text: "No. I let it rot the day I lost the love of my life. Whatever was left decayed quietly until there was nothing worth saving. Since then, everyone has reduced to passing shadows, empty noise in a world that never cared.", date: "2026-04-02" },
+  { text: "Take me into dreams so deep they swallow what remains of me — where silence erases my name, and even waking becomes a forgotten sin.", date: "2026-04-03" },
+  { text: "To hear someone scream my name again, to be held tightly and told that they will never let go. To be truly understood — to look into someone's eyes again without doubt, without waiting for the moment it all falls apart.", date: "2026-04-07" },
+  { text: "I don't look people in the eyes anymore — I only see the ways they will leave, the quiet countdown behind every smile, the expiration date stamped on everything that feels warm and good.", date: "2026-04-07" },
+  { text: "Every beautiful thing has only ever taught me how to grieve it. I am so tired of being the one left behind — of being the ellipsis at the end of someone else's story.", date: "2026-04-07" },
 ];
 
-function renderVerses() {
+function loadExtraVerses() {
+  try { return JSON.parse(localStorage.getItem('zk_verses') || '[]'); }
+  catch { return []; }
+}
+function saveExtraVerses(arr) {
+  localStorage.setItem('zk_verses', JSON.stringify(arr));
+}
+
+function formatDate(iso) {
+  const [y,m,d] = iso.split('-').map(Number);
+  const months = ['jan','feb','mar','apr','may','jun','jul','aug','sep','oct','nov','dec'];
+  return months[m-1] + ' ' + d + ', ' + y;
+}
+
+function renderVerses(adminMode) {
+  const extras = loadExtraVerses();
+  const all = [...BASE_VERSES, ...extras].sort((a,b) => a.date.localeCompare(b.date));
   const c = document.getElementById('verses-container');
-  if (!VERSES.length) {
+  if (!all.length) {
     c.innerHTML = '<p style="font-size:16px;color:var(--text-soft);font-style:italic;font-family:Cormorant Garamond,serif;padding:10px 0;">no unsaid thoughts yet.</p>';
     return;
   }
-  const sorted = [...VERSES].sort((a, b) => new Date(a.date) - new Date(b.date));
-  c.innerHTML = sorted.map(v => `
-    <div class="verse-card">
+  c.innerHTML = all.map((v, i) => {
+    const isExtra = i >= BASE_VERSES.length;
+    const delBtn = (adminMode && isExtra)
+      ? `<button class="verse-delete-btn" onclick="adminDelete(${i - BASE_VERSES.length})">✕ remove</button>`
+      : '';
+    return `<div class="verse-card verse-card-admin">
       <p class="verse-text">"${v.text}"</p>
-      <div class="verse-meta">${v.date}</div>
-    </div>
-  `).join('');
+      <div class="verse-meta">${formatDate(v.date)}</div>
+      ${delBtn}
+    </div>`;
+  }).join('');
 }
 
-function toggleEmailPopup(e) {
-  e.stopPropagation();
-  const popup = document.getElementById('email-popup');
-  const btn = e.currentTarget;
-  const rect = btn.getBoundingClientRect();
-  const popupW = 240;
-  const left = rect.left + rect.width / 2 - popupW / 2;
-  const clampedLeft = Math.max(8, Math.min(left, window.innerWidth - popupW - 8));
+// ─────────────────────────────────────────────────────────
+// VERSE ADMIN PANEL
+// ─────────────────────────────────────────────────────────
+// Change this password to something only you know
+const ADMIN_PASSWORD = 'zakuro2026';
+let adminUnlocked = false;
+let adminTapCount = 0;
+let adminTapTimer = null;
 
-  popup.style.bottom = (window.innerHeight - rect.top + 10) + 'px';
-  popup.style.left = clampedLeft + 'px';
-  popup.style.top = 'auto';
-  popup.style.transform = 'none';
-  popup.style.animation = 'fadeUp 0.2s ease both';
-  popup.style.display = popup.style.display === 'block' ? 'none' : 'block';
-}
-
-function copyEmail() {
-  navigator.clipboard.writeText('zakurotakana@gmail.com').then(() => {
-    const btn = document.getElementById('copy-btn');
-    btn.textContent = 'copied!';
-    btn.style.background = '#aecdc7';
-    setTimeout(() => { btn.textContent = 'copy'; btn.style.background = ''; }, 2000);
-  });
-}
-
-document.addEventListener('click', () => {
-  document.getElementById('email-popup').style.display = 'none';
-});
-
-// ── MUSIC PLAYER ──────────────────────────────────────
-const audio     = document.getElementById('bg-music');
-const icon      = document.getElementById('music-icon');
-const bars      = document.getElementById('music-bars');
-const volIcon   = document.getElementById('volume-icon');
-const player    = document.getElementById('music-player');
-let playing     = false;
-
-function setPlaying(state) {
-  playing = state;
-  if (playing) {
-    audio.play();
-    icon.textContent = 'pause';
-    bars.classList.remove('paused');
-  } else {
-    audio.pause();
-    icon.textContent = 'music_note';
-    bars.classList.add('paused');
+function adminTap() {
+  adminTapCount++;
+  clearTimeout(adminTapTimer);
+  adminTapTimer = setTimeout(() => { adminTapCount = 0; }, 1200);
+  if (adminTapCount >= 5) {
+    adminTapCount = 0;
+    document.getElementById('admin-panel').classList.toggle('open');
+    if (!adminUnlocked) {
+      document.getElementById('admin-pw-wrap').style.display = 'flex';
+      document.getElementById('admin-form').style.display = 'none';
+      document.getElementById('admin-pw-error').style.display = 'none';
+    }
   }
 }
 
-function toggleMusic() {
-  setPlaying(!playing);
+function adminLogin() {
+  const pw = document.getElementById('admin-pw').value;
+  if (pw === ADMIN_PASSWORD) {
+    adminUnlocked = true;
+    document.getElementById('admin-pw-wrap').style.display = 'none';
+    document.getElementById('admin-pw-error').style.display = 'none';
+    document.getElementById('admin-form').style.display = 'block';
+    // Set today's date as default
+    document.getElementById('admin-date').value = new Date().toISOString().split('T')[0];
+    renderVerses(true);
+  } else {
+    document.getElementById('admin-pw-error').style.display = 'block';
+    document.getElementById('admin-pw').value = '';
+  }
 }
 
-function toggleMute() {
-  audio.muted = !audio.muted;
-  volIcon.textContent = audio.muted ? 'volume_off' : 'volume_up';
+function adminAdd() {
+  const text = document.getElementById('admin-text').value.trim();
+  const date = document.getElementById('admin-date').value;
+  if (!text || !date) return;
+  const extras = loadExtraVerses();
+  extras.push({ text, date });
+  saveExtraVerses(extras);
+  document.getElementById('admin-text').value = '';
+  renderVerses(true);
 }
 
-// Attempt autoplay on first user interaction with the page
-document.addEventListener('click', function tryAutoplay() {
-  if (!playing) setPlaying(true);
-  document.removeEventListener('click', tryAutoplay);
-}, { once: true });
+function adminDelete(idx) {
+  const extras = loadExtraVerses();
+  extras.splice(idx, 1);
+  saveExtraVerses(extras);
+  renderVerses(true);
+}
 
-// Also try immediately (works if browser allows)
+function adminLock() {
+  adminUnlocked = false;
+  document.getElementById('admin-panel').classList.remove('open');
+  renderVerses(false);
+}
+
+// ─────────────────────────────────────────────────────────
+// VISITOR COUNTER
+// ─────────────────────────────────────────────────────────
+const COUNTER_NAMESPACE = 'zakuro-portfolio';
+const COUNTER_KEY = 'homepage-views';
+
+async function djb2Hash(str) {
+  let hash = 5381;
+  for (let i = 0; i < str.length; i++) {
+    hash = ((hash << 5) + hash) ^ str.charCodeAt(i);
+    hash = hash >>> 0;
+  }
+  return hash.toString(36);
+}
+
+async function initVisitorCounter() {
+  const el = document.getElementById('visitor-count');
+  try {
+    const ipRes = await fetch('https://api.ipify.org?format=json');
+    const { ip } = await ipRes.json();
+    const ipHash = await djb2Hash(ip);
+    const seenKey = 'zk_seen_' + ipHash;
+    const alreadySeen = localStorage.getItem(seenKey);
+    const url = alreadySeen
+      ? `https://api.countapi.xyz/get/${COUNTER_NAMESPACE}/${COUNTER_KEY}`
+      : `https://api.countapi.xyz/hit/${COUNTER_NAMESPACE}/${COUNTER_KEY}`;
+    const countRes = await fetch(url);
+    const { value } = await countRes.json();
+    if (!alreadySeen) {
+      localStorage.setItem(seenKey, Date.now());
+      cleanOldHashes();
+    }
+    animateCount(el, value);
+  } catch { el.textContent = '—'; }
+}
+
+function animateCount(el, target) {
+  const duration = 900, start = performance.now();
+  function tick(now) {
+    const t = Math.min((now - start) / duration, 1);
+    const eased = 1 - Math.pow(1 - t, 3);
+    el.textContent = Math.round(target * eased).toLocaleString();
+    if (t < 1) requestAnimationFrame(tick);
+  }
+  requestAnimationFrame(tick);
+}
+
+function cleanOldHashes() {
+  const thirtyDays = 30 * 24 * 60 * 60 * 1000;
+  for (const key of Object.keys(localStorage)) {
+    if (key.startsWith('zk_seen_')) {
+      if (Date.now() - parseInt(localStorage.getItem(key), 10) > thirtyDays)
+        localStorage.removeItem(key);
+    }
+  }
+}
+
+// ─────────────────────────────────────────────────────────
+// EMAIL POPUP
+// ─────────────────────────────────────────────────────────
+function toggleEmailPopup(e) {
+  e.stopPropagation();
+  const popup = document.getElementById('email-popup');
+  const rect = e.currentTarget.getBoundingClientRect();
+  const popupW = 240;
+  const left = Math.max(8, Math.min(rect.left + rect.width/2 - popupW/2, window.innerWidth - popupW - 8));
+  popup.style.bottom = (window.innerHeight - rect.top + 10) + 'px';
+  popup.style.left = left + 'px';
+  popup.style.top = 'auto'; popup.style.transform = 'none';
+  popup.style.display = popup.style.display === 'block' ? 'none' : 'block';
+}
+function copyEmail() {
+  navigator.clipboard.writeText('zakurotakana@gmail.com').then(() => {
+    const btn = document.getElementById('copy-btn');
+    btn.textContent = 'copied!'; btn.style.background = '#aecdc7';
+    setTimeout(() => { btn.textContent = 'copy'; btn.style.background = ''; }, 2000);
+  });
+}
+document.addEventListener('click', () => { document.getElementById('email-popup').style.display = 'none'; });
+
+// ─────────────────────────────────────────────────────────
+// MUSIC PLAYER
+// ─────────────────────────────────────────────────────────
+const audio = document.getElementById('bg-music');
+const icon = document.getElementById('music-icon');
+const bars = document.getElementById('music-bars');
+const volIcon = document.getElementById('volume-icon');
+let playing = false, hintShown = false;
+
+function setPlaying(state) {
+  playing = state;
+  if (playing) { audio.play(); icon.textContent = 'pause'; bars.classList.remove('paused'); }
+  else { audio.pause(); icon.textContent = 'music_note'; bars.classList.add('paused'); }
+}
+function toggleMusic() { setPlaying(!playing); }
+function toggleMute() { audio.muted = !audio.muted; volIcon.textContent = audio.muted ? 'volume_off' : 'volume_up'; }
+
+function showAutoplayHint() {
+  if (hintShown) return; hintShown = true;
+  const hint = document.getElementById('autoplay-hint');
+  hint.style.display = 'block';
+  setTimeout(() => { hint.style.display = 'none'; }, 4000);
+}
+
 audio.volume = 0.5;
-audio.play().then(() => { playing = true; icon.textContent = 'pause'; bars.classList.remove('paused'); }).catch(() => {});
+audio.play()
+  .then(() => { playing = true; icon.textContent = 'pause'; bars.classList.remove('paused'); })
+  .catch(() => {
+    showAutoplayHint();
+    document.addEventListener('click', function tryPlay() {
+      if (!playing) setPlaying(true);
+      document.removeEventListener('click', tryPlay);
+    }, { once: true });
+  });
 
-renderVerses();
+// ─────────────────────────────────────────────────────────
+// INIT
+// ─────────────────────────────────────────────────────────
+renderVerses(false);
+initVisitorCounter();
 </script>
 </body>
 </html>
