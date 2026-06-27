@@ -5,7 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <meta name="description" content="Zakuro — IT student, developer, and writer from the Philippines. Explore my projects, skills, and unsaid thoughts."/>
 
-  <!-- Open Graph / Discord / Twitter card -->
   <meta property="og:type"        content="website"/>
   <meta property="og:title"       content="Zakuro"/>
   <meta property="og:description" content="IT student, developer, and writer from the Philippines."/>
@@ -54,7 +53,7 @@
 
     .page { max-width: 480px; margin: 0 auto; position: relative; z-index: 1; padding: 28px 16px 120px; text-align: center; }
 
-    /* ── HERO ENTRANCE ANIMATION ── */
+    /* ── ENTRANCE ANIMATIONS ── */
     .hero-enter { animation: heroIn 0.7s cubic-bezier(0.22,1,0.36,1) both; }
     .hero-enter .avatar-ring { animation: avatarPop 0.6s cubic-bezier(0.34,1.56,0.64,1) 0.15s both; }
     .hero-enter h1  { animation: fadeSlide 0.5s ease 0.3s both; }
@@ -141,6 +140,19 @@
       border: 1.5px solid var(--c2);
       display: flex; align-items: center; justify-content: center;
       background: rgba(240,241,199,0.25); margin: 0 auto 20px;
+      position: relative;
+    }
+    /* subtle ring pulse */
+    .avatar-ring::after {
+      content: '';
+      position: absolute; inset: -6px;
+      border-radius: 50%;
+      border: 1px solid rgba(111,156,151,0.3);
+      animation: ringPulse 3s ease-in-out infinite;
+    }
+    @keyframes ringPulse {
+      0%,100% { opacity: 0.4; transform: scale(1); }
+      50%      { opacity: 0.9; transform: scale(1.04); }
     }
     .avatar-inner { width: 130px; height: 130px; border-radius: 50%; overflow: hidden; background: linear-gradient(135deg, #aecdc7, #6f9c97); }
     .avatar-inner img { width: 100%; height: 100%; object-fit: cover; }
@@ -176,7 +188,7 @@
     .currently-val em { font-size: 13px; color: var(--text-soft); font-style: normal; }
     .last-updated { font-size: 11px; color: var(--text-soft); letter-spacing: 0.08em; margin-top: 10px; text-align: right; }
 
-    /* quick-links */
+    /* ── HOME QUICK LINKS ── */
     .home-links { display: flex; gap: 8px; flex-wrap: wrap; justify-content: center; }
     .home-link-btn {
       background: var(--card-bg); border: 0.5px solid var(--border);
@@ -196,13 +208,27 @@
 
     /* ── SKILLS ── */
     .tech-grid { display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; }
-    .tech-tag { background: rgba(174,205,199,0.35); border: 0.5px solid var(--border); border-radius: 14px; padding: 14px 20px; color: var(--text); transition: transform 0.15s, background 0.15s, box-shadow 0.15s; cursor: default; box-shadow: 0 1px 4px rgba(45,98,106,0.07); display: flex; flex-direction: column; align-items: center; gap: 7px; min-width: 90px; }
+    .tech-tag {
+      background: rgba(174,205,199,0.35); border: 0.5px solid var(--border);
+      border-radius: 14px; padding: 14px 20px; color: var(--text);
+      transition: transform 0.15s, background 0.15s, box-shadow 0.15s;
+      cursor: default; box-shadow: 0 1px 4px rgba(45,98,106,0.07);
+      display: flex; flex-direction: column; align-items: center; gap: 7px; min-width: 90px;
+    }
     .tech-tag:hover { transform: translateY(-3px); background: rgba(174,205,199,0.58); box-shadow: 0 4px 14px rgba(45,98,106,0.14); }
     .tech-icon { font-size: 26px; line-height: 1; }
     .tech-name { font-size: 13px; font-weight: 500; letter-spacing: 0.03em; color: var(--text); }
 
+
+
     /* ── ACHIEVEMENTS ── */
-    .award-card { background: rgba(240,241,199,0.45); border: 0.5px solid var(--c1); border-radius: 14px; padding: 14px 18px; margin-bottom: 10px; display: flex; align-items: center; gap: 14px; transition: transform 0.18s, box-shadow 0.18s; position: relative; overflow: hidden; }
+    .award-card {
+      background: rgba(240,241,199,0.45); border: 0.5px solid var(--c1);
+      border-radius: 14px; padding: 14px 18px; margin-bottom: 10px;
+      display: flex; align-items: center; gap: 14px;
+      transition: transform 0.18s, box-shadow 0.18s;
+      position: relative; overflow: hidden;
+    }
     .award-card::before { content:''; position:absolute; inset:0; background:linear-gradient(120deg,rgba(174,205,199,0.15) 0%,transparent 60%); pointer-events:none; }
     .award-card:last-child { margin-bottom: 0; }
     .award-card:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(45,98,106,0.12); }
@@ -211,7 +237,11 @@
     .award-sub { font-size: 12px; color: var(--text-soft); margin-top: 2px; text-align: left; }
 
     /* ── PROJECTS ── */
-    .project-card { background: rgba(240,241,199,0.45); border: 0.5px solid var(--c1); border-radius: 10px; padding: 14px 16px; margin-bottom: 8px; transition: transform 0.15s, box-shadow 0.15s; text-align: center; }
+    .project-card {
+      background: rgba(240,241,199,0.45); border: 0.5px solid var(--c1);
+      border-radius: 10px; padding: 14px 16px; margin-bottom: 8px;
+      transition: transform 0.15s, box-shadow 0.15s; text-align: center;
+    }
     .project-card:last-child { margin-bottom: 0; }
     .project-card:hover { transform: translateY(-2px); box-shadow: 0 4px 16px rgba(45,98,106,0.12); }
     .project-name { font-size: 15px; font-weight: 500; margin-bottom: 4px; }
@@ -229,131 +259,143 @@
     }
     .project-link .material-icons-round { font-size: 14px; color: var(--c3); }
     .project-link:hover { background: rgba(45,98,106,0.18); transform: translateY(-1px); }
-    .progress-bar-wrap { flex:1; height:4px; background:rgba(45,98,106,0.12); border-radius:4px; overflow:hidden; }
-    .progress-bar-fill { height:100%; background:linear-gradient(90deg,var(--c2),var(--c3)); border-radius:4px; transition:width 0.8s ease; }
-    .progress-label { font-size:11px; color:var(--text-soft); flex-shrink:0; }
-    .project-progress { display:flex; align-items:center; gap:8px; margin-bottom:9px; }
-
-    /* ── VERSES ── */
-    .verse-notice { background:rgba(45,98,106,0.08); border:0.5px solid rgba(45,98,106,0.18); border-radius:10px; padding:10px 14px; margin-bottom:14px; font-size:12px; color:var(--text-mid); line-height:1.6; display:flex; gap:8px; align-items:flex-start; text-align:left; }
-    .verse-notice .material-icons-round { font-size:15px; flex-shrink:0; margin-top:1px; opacity:0.7; }
-    .verse-card { border-top:2px solid var(--c2); border-radius:10px; padding:14px 16px; margin-bottom:12px; background:rgba(240,241,199,0.35); text-align:center; transition:border-color 0.2s; }
-    .verse-card:last-of-type { margin-bottom:0; }
-    .verse-card:hover { border-color:var(--c4); }
-    .verse-text { font-family:'Cormorant Garamond',serif; font-style:italic; font-size:19px; color:var(--text); line-height:1.75; margin-bottom:8px; }
-    .verse-meta { font-size:13px; color:var(--text-soft); }
-
-    /* ── VERSE ADMIN PANEL ── */
-    #admin-trigger { font-size:10px; color:rgba(45,98,106,0.25); letter-spacing:0.1em; cursor:pointer; margin-top:16px; user-select:none; transition:color 0.2s; }
-    #admin-trigger:hover { color:var(--text-soft); }
-    #admin-panel {
-      display:none; margin-top:14px;
-      background:rgba(45,98,106,0.06); border:0.5px solid rgba(45,98,106,0.20);
-      border-radius:14px; padding:16px;
-      animation: fadeUp 0.25s ease both;
+    .project-status-badge {
+      display: inline-flex; align-items: center; gap: 5px;
+      font-size: 11px; color: var(--text-soft);
+      background: rgba(45,98,106,0.08); border-radius: 20px;
+      padding: 3px 10px; margin-bottom: 8px; letter-spacing: 0.06em;
     }
-    #admin-panel.open { display:block; }
-    .admin-label { font-size:10px; letter-spacing:0.18em; text-transform:uppercase; color:var(--text-soft); margin-bottom:6px; text-align:left; }
-    .admin-textarea {
-      width:100%; min-height:80px; resize:vertical;
-      background:rgba(240,241,199,0.6); border:0.5px solid var(--c1);
-      border-radius:8px; padding:10px 12px;
-      font-family:'Cormorant Garamond',serif; font-size:16px; font-style:italic;
-      color:var(--text); outline:none;
-      transition:border-color 0.2s;
-    }
-    .admin-textarea:focus { border-color:var(--c3); }
-    .admin-row { display:flex; gap:8px; margin-top:8px; align-items:center; }
-    .admin-input {
-      flex:1; background:rgba(240,241,199,0.6); border:0.5px solid var(--c1);
-      border-radius:8px; padding:8px 12px;
-      font-family:'DM Sans',sans-serif; font-size:13px; color:var(--text); outline:none;
-    }
-    .admin-input:focus { border-color:var(--c3); }
-    .admin-btn {
-      background:rgba(45,98,106,0.15); border:0.5px solid rgba(45,98,106,0.30);
-      border-radius:8px; padding:8px 16px;
-      font-size:12px; color:var(--text); cursor:pointer;
-      font-family:'DM Sans',sans-serif; letter-spacing:0.04em;
-      transition:background 0.18s;
-    }
-    .admin-btn:hover { background:rgba(45,98,106,0.28); }
-    .admin-btn.danger { background:rgba(180,60,60,0.10); border-color:rgba(180,60,60,0.25); color:#8a3a3a; }
-    .admin-btn.danger:hover { background:rgba(180,60,60,0.22); }
-    #admin-pw-wrap { display:flex; gap:8px; justify-content:center; margin-bottom:12px; }
-    #admin-pw { text-align:center; width:160px; letter-spacing:0.1em; }
-    #admin-pw-error { font-size:11px; color:#9a4040; margin-top:4px; display:none; }
-    .verse-delete-btn { font-size:11px; color:rgba(140,60,60,0.5); background:none; border:none; cursor:pointer; margin-top:5px; font-family:'DM Sans',sans-serif; transition:color 0.2s; }
-    .verse-delete-btn:hover { color:rgba(140,60,60,0.9); }
-    .verse-card-admin { display:flex; flex-direction:column; align-items:center; }
+    .project-status-dot { width: 5px; height: 5px; border-radius: 50%; background: var(--c3); animation: pulse-dot 2s ease-in-out infinite; }
 
     /* ── CONTACT ── */
-    .contact-card { background:var(--card-bg); border:0.5px solid var(--c1); border-radius:16px; padding:24px 22px; text-align:center; margin-bottom:12px; }
-    .social-links { display:flex; justify-content:center; gap:8px; flex-wrap:wrap; }
-    .social-btn { background:rgba(174,205,199,0.28); border:0.5px solid var(--border); border-radius:10px; padding:9px 20px; font-size:13px; color:var(--text); text-decoration:none; letter-spacing:0.04em; transition:background 0.2s,transform 0.15s; cursor:pointer; font-family:'DM Sans',sans-serif; display:flex; align-items:center; gap:6px; }
-    .social-btn .material-icons-round { font-size:16px; color:var(--c3); }
-    .social-btn:hover { background:rgba(174,205,199,0.55); transform:translateY(-2px); }
-    .footer-note { margin-top:16px; font-size:16px; color:var(--text-soft); letter-spacing:0.06em; font-style:italic; font-family:'Cormorant Garamond',serif; }
+    .contact-card { background: var(--card-bg); border: 0.5px solid var(--c1); border-radius: 16px; padding: 24px 22px; text-align: center; margin-bottom: 12px; }
+    .social-links { display: flex; justify-content: center; gap: 8px; flex-wrap: wrap; }
+    .social-btn {
+      background: rgba(174,205,199,0.28); border: 0.5px solid var(--border);
+      border-radius: 10px; padding: 9px 20px; font-size: 13px; color: var(--text);
+      text-decoration: none; letter-spacing: 0.04em;
+      transition: background 0.2s, transform 0.15s; cursor: pointer;
+      font-family: 'DM Sans', sans-serif; display: flex; align-items: center; gap: 6px;
+    }
+    .social-btn .material-icons-round { font-size: 16px; color: var(--c3); }
+    .social-btn:hover { background: rgba(174,205,199,0.55); transform: translateY(-2px); }
+    .footer-note { margin-top: 16px; font-size: 16px; color: var(--text-soft); letter-spacing: 0.06em; font-style: italic; font-family: 'Cormorant Garamond', serif; }
 
     /* ── ABOUT ── */
-    .about-hero { background:linear-gradient(150deg,#aecdc7 0%,#c4d9d6 45%,#dddfc0 100%); border-radius:16px; padding:28px 24px; margin-bottom:12px; border:0.5px solid var(--border); box-shadow:0 4px 24px rgba(45,98,106,0.10); }
-    .about-avatar-wrap { width:80px; height:80px; border-radius:50%; border:1.5px solid var(--c2); overflow:hidden; margin:0 auto 14px; background:linear-gradient(135deg,#aecdc7,#6f9c97); }
-    .about-avatar-wrap img { width:100%; height:100%; object-fit:cover; }
-    .about-name { font-family:'Cormorant Garamond',serif; font-weight:300; font-size:22px; letter-spacing:0.18em; text-transform:uppercase; color:var(--text); margin-bottom:4px; }
-    .about-role { font-size:12px; color:var(--text-mid); letter-spacing:0.1em; }
-    .about-block { background:var(--card-bg); border:0.5px solid var(--c1); border-radius:16px; padding:20px 22px; margin-bottom:12px; backdrop-filter:blur(4px); box-shadow:0 2px 12px rgba(45,98,106,0.07); }
-    .about-block:last-child { margin-bottom:0; }
-    .about-block p { font-family:'Cormorant Garamond',serif; font-size:18px; line-height:1.75; color:var(--text-mid); font-style:italic; }
-    .about-block p + p { margin-top:10px; }
-    .about-facts { display:grid; grid-template-columns:1fr 1fr; gap:8px; }
-    .about-fact { background:rgba(174,205,199,0.22); border:0.5px solid var(--c1); border-radius:12px; padding:12px 10px; text-align:center; }
-    .about-fact-icon { font-size:20px; margin-bottom:4px; }
-    .about-fact-label { font-size:10px; letter-spacing:0.14em; text-transform:uppercase; color:var(--text-soft); margin-bottom:3px; }
-    .about-fact-val { font-family:'Cormorant Garamond',serif; font-size:15px; font-weight:400; color:var(--text); }
-    .about-interests { display:flex; flex-wrap:wrap; gap:8px; justify-content:center; }
-    .about-interest { background:rgba(174,205,199,0.30); border:0.5px solid var(--border); border-radius:20px; padding:7px 16px; font-size:13px; color:var(--text); display:flex; align-items:center; gap:6px; transition:transform 0.15s,background 0.15s; }
-    .about-interest:hover { transform:translateY(-2px); background:rgba(174,205,199,0.52); }
-    .about-interest .material-icons-round { font-size:15px; color:var(--c3); }
+    .about-hero {
+      background: linear-gradient(150deg, #aecdc7 0%, #c4d9d6 45%, #dddfc0 100%);
+      border-radius: 16px; padding: 28px 24px; margin-bottom: 12px;
+      border: 0.5px solid var(--border); box-shadow: 0 4px 24px rgba(45,98,106,0.10);
+    }
+    .about-avatar-wrap { width: 80px; height: 80px; border-radius: 50%; border: 1.5px solid var(--c2); overflow: hidden; margin: 0 auto 14px; background: linear-gradient(135deg, #aecdc7, #6f9c97); }
+    .about-avatar-wrap img { width: 100%; height: 100%; object-fit: cover; }
+    .about-name { font-family: 'Cormorant Garamond', serif; font-weight: 300; font-size: 22px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--text); margin-bottom: 4px; }
+    .about-role { font-size: 12px; color: var(--text-mid); letter-spacing: 0.1em; }
+    .about-block { background: var(--card-bg); border: 0.5px solid var(--c1); border-radius: 16px; padding: 20px 22px; margin-bottom: 12px; backdrop-filter: blur(4px); box-shadow: 0 2px 12px rgba(45,98,106,0.07); }
+    .about-block:last-child { margin-bottom: 0; }
+    .about-block p { font-family: 'Cormorant Garamond', serif; font-size: 18px; line-height: 1.75; color: var(--text-mid); font-style: italic; }
+    .about-block p + p { margin-top: 10px; }
+    .about-facts { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+    .about-fact { background: rgba(174,205,199,0.22); border: 0.5px solid var(--c1); border-radius: 12px; padding: 12px 10px; text-align: center; }
+    .about-fact-icon { font-size: 20px; margin-bottom: 4px; }
+    .about-fact-label { font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--text-soft); margin-bottom: 3px; }
+    .about-fact-val { font-family: 'Cormorant Garamond', serif; font-size: 15px; font-weight: 400; color: var(--text); }
+    .about-interests { display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; }
+    .about-interest {
+      background: rgba(174,205,199,0.30); border: 0.5px solid var(--border);
+      border-radius: 20px; padding: 7px 16px; font-size: 13px; color: var(--text);
+      display: flex; align-items: center; gap: 6px;
+      transition: transform 0.15s, background 0.15s;
+    }
+    .about-interest:hover { transform: translateY(-2px); background: rgba(174,205,199,0.52); }
+    .about-interest .material-icons-round { font-size: 15px; color: var(--c3); }
 
-    /* ── DISCORD STATUS DOT ── */
-    .discord-dot { display:inline-block; width:8px; height:8px; border-radius:50%; margin-right:5px; vertical-align:middle; flex-shrink:0; }
-    .discord-dot.online  { background:#3ba55d; }
-    .discord-dot.idle    { background:#faa61a; }
-    .discord-dot.dnd     { background:#ed4245; }
-    .discord-dot.offline { background:#747f8d; }
+    /* ── DISCORD STATUS ── */
+    .discord-dot { display: inline-block; width: 8px; height: 8px; border-radius: 50%; margin-right: 5px; vertical-align: middle; flex-shrink: 0; }
+    .discord-dot.online  { background: #3ba55d; }
+    .discord-dot.idle    { background: #faa61a; }
+    .discord-dot.dnd     { background: #ed4245; }
+    .discord-dot.offline { background: #747f8d; }
 
     /* ── EMAIL POPUP ── */
-    #email-popup { display:none; position:fixed; background:#dde0b8; border:0.5px solid var(--c1); border-radius:14px; padding:14px 20px; z-index:200; box-shadow:0 8px 30px rgba(45,98,106,0.20); text-align:center; min-width:240px; }
-    .email-popup-label { font-size:9px; letter-spacing:0.2em; text-transform:uppercase; color:var(--text-soft); margin-bottom:8px; }
-    .email-popup-address { font-family:'Cormorant Garamond',serif; font-size:16px; color:var(--text); letter-spacing:0.04em; margin-bottom:10px; }
-    .email-copy-btn { background:rgba(174,205,199,0.4); border:0.5px solid var(--c1); border-radius:8px; padding:5px 14px; font-size:11px; color:var(--text); cursor:pointer; font-family:'DM Sans',sans-serif; transition:background 0.2s; }
-    .email-copy-btn:hover { background:rgba(174,205,199,0.7); }
+    #email-popup { display: none; position: fixed; background: #dde0b8; border: 0.5px solid var(--c1); border-radius: 14px; padding: 14px 20px; z-index: 200; box-shadow: 0 8px 30px rgba(45,98,106,0.20); text-align: center; min-width: 240px; }
+    .email-popup-label { font-size: 9px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--text-soft); margin-bottom: 8px; }
+    .email-popup-address { font-family: 'Cormorant Garamond', serif; font-size: 16px; color: var(--text); letter-spacing: 0.04em; margin-bottom: 10px; }
+    .email-copy-btn { background: rgba(174,205,199,0.4); border: 0.5px solid var(--c1); border-radius: 8px; padding: 5px 14px; font-size: 11px; color: var(--text); cursor: pointer; font-family: 'DM Sans', sans-serif; transition: background 0.2s; }
+    .email-copy-btn:hover { background: rgba(174,205,199,0.7); }
 
     /* ── MUSIC PLAYER ── */
-    #music-player { position:fixed; top:20px; right:16px; z-index:100; display:flex; align-items:center; gap:10px; background:rgba(45,98,106,0.88); backdrop-filter:blur(16px); -webkit-backdrop-filter:blur(16px); border:0.5px solid rgba(174,205,199,0.30); border-radius:28px; padding:8px 14px 8px 10px; box-shadow:0 8px 32px rgba(45,98,106,0.28),0 2px 8px rgba(45,98,106,0.18),inset 0 0.5px 0 rgba(174,205,199,0.20); }
-    #music-toggle { background:none; border:none; cursor:pointer; width:32px; height:32px; border-radius:50%; display:flex; align-items:center; justify-content:center; transition:background 0.2s; flex-shrink:0; }
-    #music-toggle:hover { background:rgba(174,205,199,0.18); }
-    #music-toggle .material-icons-round { font-size:18px; color:#f0f1c7; }
-    #music-info { display:flex; flex-direction:column; gap:1px; overflow:hidden; max-width:180px; }
-    #music-title { font-size:11px; font-weight:500; color:#f0f1c7; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
-    #music-artist { font-size:9px; letter-spacing:0.06em; color:rgba(174,205,199,0.7); white-space:nowrap; }
-    #music-bars { display:flex; align-items:flex-end; gap:2px; height:14px; flex-shrink:0; }
-    #music-bars span { display:block; width:3px; background:rgba(174,205,199,0.7); border-radius:2px; animation:bar-bounce 0.9s ease-in-out infinite alternate; }
+    #music-player {
+      position: fixed; top: 20px; right: 16px; z-index: 100;
+      display: flex; align-items: center; gap: 10px;
+      background: rgba(45,98,106,0.88);
+      backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
+      border: 0.5px solid rgba(174,205,199,0.30);
+      border-radius: 28px; padding: 8px 14px 8px 10px;
+      box-shadow: 0 8px 32px rgba(45,98,106,0.28), 0 2px 8px rgba(45,98,106,0.18), inset 0 0.5px 0 rgba(174,205,199,0.20);
+      transition: opacity 0.3s;
+    }
+    #music-player:hover { opacity: 1 !important; }
+    #music-toggle { background: none; border: none; cursor: pointer; width: 32px; height: 32px; border-radius: 50%; display: flex; align-items: center; justify-content: center; transition: background 0.2s; flex-shrink: 0; }
+    #music-toggle:hover { background: rgba(174,205,199,0.18); }
+    #music-toggle .material-icons-round { font-size: 18px; color: #f0f1c7; }
+    #music-info { display: flex; flex-direction: column; gap: 1px; overflow: hidden; max-width: 180px; }
+    #music-title { font-size: 11px; font-weight: 500; color: #f0f1c7; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    #music-artist { font-size: 9px; letter-spacing: 0.06em; color: rgba(174,205,199,0.7); white-space: nowrap; }
+    #music-bars { display: flex; align-items: flex-end; gap: 2px; height: 14px; flex-shrink: 0; }
+    #music-bars span { display: block; width: 3px; background: rgba(174,205,199,0.7); border-radius: 2px; animation: bar-bounce 0.9s ease-in-out infinite alternate; }
     #music-bars span:nth-child(1){height:6px;animation-delay:0s;animation-duration:0.7s}
     #music-bars span:nth-child(2){height:12px;animation-delay:.15s;animation-duration:.9s}
     #music-bars span:nth-child(3){height:8px;animation-delay:.3s;animation-duration:.8s}
     #music-bars span:nth-child(4){height:14px;animation-delay:.1s;animation-duration:1s}
-    #music-bars.paused span { animation-play-state:paused; }
+    #music-bars.paused span { animation-play-state: paused; }
     @keyframes bar-bounce { from{transform:scaleY(0.3)} to{transform:scaleY(1)} }
-    #volume-btn { background:none; border:none; cursor:pointer; display:flex; align-items:center; justify-content:center; padding:0; flex-shrink:0; }
-    #volume-btn .material-icons-round { font-size:15px; color:rgba(174,205,199,0.65); transition:color 0.2s; }
-    #volume-btn:hover .material-icons-round { color:#f0f1c7; }
+    #volume-btn { background: none; border: none; cursor: pointer; display: flex; align-items: center; justify-content: center; padding: 0; flex-shrink: 0; }
+    #volume-btn .material-icons-round { font-size: 15px; color: rgba(174,205,199,0.65); transition: color 0.2s; }
+    #volume-btn:hover .material-icons-round { color: #f0f1c7; }
+
+    /* ── NOW PLAYING WAVEFORM (inline) ── */
+    .now-playing-row {
+      display: flex; align-items: center; gap: 10px;
+      background: rgba(45,98,106,0.08); border: 0.5px solid rgba(45,98,106,0.16);
+      border-radius: 12px; padding: 10px 14px; margin-top: 10px;
+    }
+    .now-playing-icon { font-size: 18px; flex-shrink: 0; }
+    .now-playing-text { font-size: 13px; color: var(--text-mid); text-align: left; }
+    .now-playing-title { font-family: 'Cormorant Garamond', serif; font-size: 16px; color: var(--text); font-style: italic; }
+
+    /* ── GUESTBOOK ── */
+    #tab-guestbook .section-card { text-align: left; }
+    .guestbook-form { display: flex; flex-direction: column; gap: 8px; margin-bottom: 18px; }
+    .guestbook-input, .guestbook-textarea {
+      background: rgba(240,241,199,0.6); border: 0.5px solid var(--c1);
+      border-radius: 8px; padding: 10px 12px;
+      font-family: 'DM Sans', sans-serif; font-size: 13px; color: var(--text);
+      outline: none; transition: border-color 0.2s; width: 100%;
+    }
+    .guestbook-textarea { min-height: 70px; resize: none; font-family: 'Cormorant Garamond', serif; font-size: 16px; font-style: italic; }
+    .guestbook-input:focus, .guestbook-textarea:focus { border-color: var(--c3); }
+    .guestbook-submit {
+      background: rgba(45,98,106,0.15); border: 0.5px solid rgba(45,98,106,0.30);
+      border-radius: 8px; padding: 9px 18px; font-size: 12px; color: var(--text);
+      cursor: pointer; font-family: 'DM Sans', sans-serif; letter-spacing: 0.06em;
+      align-self: flex-end; transition: background 0.18s, transform 0.12s;
+    }
+    .guestbook-submit:hover { background: rgba(45,98,106,0.26); transform: translateY(-1px); }
+    .guestbook-entry {
+      border-top: 0.5px solid rgba(174,205,199,0.45); padding: 12px 0; text-align: left;
+    }
+    .guestbook-entry:first-of-type { border-top: none; }
+    .guestbook-entry-name { font-size: 13px; font-weight: 500; color: var(--text); margin-bottom: 3px; }
+    .guestbook-entry-msg { font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 17px; color: var(--text-mid); line-height: 1.6; }
+    .guestbook-entry-date { font-size: 10px; color: var(--text-soft); letter-spacing: 0.08em; margin-top: 4px; }
+    .guestbook-empty { font-size: 14px; color: var(--text-soft); font-style: italic; font-family: 'Cormorant Garamond', serif; text-align: center; padding: 10px 0; }
 
     @media(max-width:440px){
       .page{padding:18px 12px 120px}
       .hero{padding:32px 18px 28px}
       .section-card{padding:16px}
-      .tab-btn{padding:7px 10px;min-width:46px}
+      .tab-btn{padding:7px 8px;min-width:42px}
       .tab-label{display:none}
       #tab-bar{padding:7px 8px}
     }
@@ -383,9 +425,8 @@
     <div class="home-links home-links-enter">
       <button class="home-link-btn" onclick="showTab('about')">about me</button>
       <button class="home-link-btn" onclick="showTab('skills')">skills &amp; stack</button>
-      <button class="home-link-btn" onclick="showTab('projects')">projects</button>
       <button class="home-link-btn" onclick="showTab('achievements')">achievements</button>
-      <button class="home-link-btn" onclick="showTab('verses')">unsaid thoughts</button>
+      <button class="home-link-btn" onclick="showTab('guestbook')">guestbook</button>
       <button class="home-link-btn" onclick="showTab('contact')">contact</button>
     </div>
   </div>
@@ -395,31 +436,73 @@
     <div class="section-card">
       <div class="section-label">languages</div>
       <div class="tech-grid">
-        <span class="tech-tag"><span class="tech-icon">☕</span><span class="tech-name">Java</span></span>
-        <span class="tech-tag"><span class="tech-icon">🐍</span><span class="tech-name">Python</span></span>
-        <span class="tech-tag"><span class="tech-icon">⚙️</span><span class="tech-name">C++</span></span>
+        <span class="tech-tag">
+          <span class="tech-icon">☕</span>
+          <span class="tech-name">Java</span>
+        </span>
+        <span class="tech-tag">
+          <span class="tech-icon">🐍</span>
+          <span class="tech-name">Python</span>
+        </span>
+        <span class="tech-tag">
+          <span class="tech-icon">⚙️</span>
+          <span class="tech-name">C++</span>
+        </span>
+        <span class="tech-tag">
+          <span class="tech-icon">🎯</span>
+          <span class="tech-name">Dart</span>
+        </span>
+      </div>
+    </div>
+    <div class="section-card">
+      <div class="section-label">frameworks &amp; tools</div>
+      <div class="tech-grid">
+        <span class="tech-tag">
+          <span class="tech-icon">📱</span>
+          <span class="tech-name">Flutter</span>
+        </span>
+        <span class="tech-tag">
+          <span class="tech-icon">⚛️</span>
+          <span class="tech-name">React</span>
+        </span>
+        <span class="tech-tag">
+          <span class="tech-icon">🔥</span>
+          <span class="tech-name">Firebase</span>
+        </span>
+        <span class="tech-tag">
+          <span class="tech-icon">🐙</span>
+          <span class="tech-name">Git / GitHub</span>
+        </span>
       </div>
     </div>
     <div class="section-card">
       <div class="section-label">databases</div>
       <div class="tech-grid">
-        <span class="tech-tag"><span class="tech-icon">🗃️</span><span class="tech-name">SQL</span></span>
-        <span class="tech-tag"><span class="tech-icon">📦</span><span class="tech-name">SQLite</span></span>
-        <span class="tech-tag"><span class="tech-icon">🖥️</span><span class="tech-name">Microsoft SQL</span></span>
-      </div>
-    </div>
-    <div class="section-card">
-      <div class="section-label">tools &amp; platforms</div>
-      <div class="tech-grid">
-        <span class="tech-tag"><span class="tech-icon">📱</span><span class="tech-name">Android Studio</span></span>
-        <span class="tech-tag"><span class="tech-icon">🔧</span><span class="tech-name">Mobile Dev</span></span>
+        <span class="tech-tag">
+          <span class="tech-icon">🗃️</span>
+          <span class="tech-name">SQL</span>
+        </span>
+        <span class="tech-tag">
+          <span class="tech-icon">📦</span>
+          <span class="tech-name">SQLite</span>
+        </span>
+        <span class="tech-tag">
+          <span class="tech-icon">🖥️</span>
+          <span class="tech-name">MS SQL</span>
+        </span>
       </div>
     </div>
     <div class="section-card">
       <div class="section-label">design</div>
       <div class="tech-grid">
-        <span class="tech-tag"><span class="tech-icon">🎨</span><span class="tech-name">Canva</span></span>
-        <span class="tech-tag"><span class="tech-icon">✏️</span><span class="tech-name">UI Design</span></span>
+        <span class="tech-tag">
+          <span class="tech-icon">🎨</span>
+          <span class="tech-name">Canva</span>
+        </span>
+        <span class="tech-tag">
+          <span class="tech-icon">✏️</span>
+          <span class="tech-name">UI Design</span>
+        </span>
       </div>
     </div>
   </div>
@@ -439,7 +522,10 @@
           <rect x="20" y="39" width="12" height="3" rx="1.5" fill="#2d626a" opacity="0.7"/>
           <path d="M26 19 L27 22 L30 22 L28 24 L29 27 L26 25 L23 27 L24 24 L22 22 L25 22 Z" fill="#f0f1c7" opacity="0.9"/>
         </svg>
-        <div><div class="award-title">Mobile App Hackathon</div><div class="award-sub">Local Champion</div></div>
+        <div>
+          <div class="award-title">Mobile App Hackathon</div>
+          <div class="award-sub">Local Champion</div>
+        </div>
       </div>
       <div class="award-card">
         <svg class="award-illus" viewBox="0 0 52 52" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -450,7 +536,10 @@
           <circle cx="26" cy="32" r="7.5" fill="#c4dbd8" stroke="#6f9c97" stroke-width="0.5"/>
           <text x="26" y="36.5" text-anchor="middle" font-family="Cormorant Garamond, serif" font-size="11" font-weight="700" fill="#2d626a">1</text>
         </svg>
-        <div><div class="award-title">Cluster Competition</div><div class="award-sub">1st Runner Up</div></div>
+        <div>
+          <div class="award-title">Cluster Competition</div>
+          <div class="award-sub">1st Runner Up</div>
+        </div>
       </div>
       <div class="award-card">
         <svg class="award-illus" viewBox="0 0 52 52" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -464,76 +553,27 @@
           <circle cx="33" cy="31" r="5" fill="#428a91"/>
           <path d="M30.5 31 L32.2 33 L35.5 29" stroke="#f0f1c7" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
         </svg>
-        <div><div class="award-title">Final Exam — Java Fundamentals</div><div class="award-sub">Completion</div></div>
-      </div>
-    </div>
-  </div>
-
-  <!-- PROJECTS -->
-  <div class="tab-panel" id="tab-projects">
-    <div class="section-card">
-      <div class="section-label">projects</div>
-      <div class="project-card">
-        <div class="project-name">Topaz Hardware</div>
-        <div class="project-desc">A window-based hardware store system with product management, login, and an inventory interface.</div>
-        <div class="project-tags">
-          <span class="project-tag">Window-Based</span>
-          <span class="project-tag">POS / Inventory</span>
-          <span class="project-tag">SQL</span>
-          <span class="project-tag">C++</span>
-        </div>
-        <div class="project-links">
-          <a class="project-link" href="https://github.com/ZakurOwO/HARDWARE_INVENTORY_MANAGEMENT_SYSTEM" target="_blank">
-            <span class="material-icons-round">code</span> View on GitHub
-          </a>
-        </div>
-      </div>
-      <div class="project-card">
-        <div class="project-name">Ligtas <em style="font-size:12px;color:var(--text-soft);">· in progress</em></div>
-        <div class="project-desc">A safety-focused mobile app and companion website currently in active development.</div>
-        <div class="project-tags">
-          <span class="project-tag">Android Application</span>
-          <span class="project-tag">Flutter</span>
-          <span class="project-tag">Dart</span>
-        </div>
-        <div class="project-links">
-          <a class="project-link" href="https://github.com/ZakurOwO" target="_blank">
-            <span class="material-icons-round">code</span> Follow on GitHub
-          </a>
+        <div>
+          <div class="award-title">Final Exam — Java Fundamentals</div>
+          <div class="award-sub">Completion</div>
         </div>
       </div>
     </div>
   </div>
 
-  <!-- VERSES -->
-  <div class="tab-panel" id="tab-verses">
+
+
+  <!-- GUESTBOOK -->
+  <div class="tab-panel" id="tab-guestbook">
     <div class="section-card">
-      <div class="section-label">unsaid thoughts</div>
-      <div class="verse-notice">
-        <span class="material-icons-round">info_outline</span>
-        <span>these are personal reflections — some of them are heavy and dark. read with care.</span>
+      <div class="section-label">guestbook</div>
+      <p style="font-family:'Cormorant Garamond',serif;font-style:italic;font-size:16px;color:var(--text-mid);margin-bottom:16px;line-height:1.6;">leave a little note :> i'd love to know you were here.</p>
+      <div class="guestbook-form">
+        <input class="guestbook-input" id="gb-name" type="text" placeholder="your name (or alias)" maxlength="40"/>
+        <textarea class="guestbook-textarea" id="gb-msg" placeholder="say something..." maxlength="200"></textarea>
+        <button class="guestbook-submit" onclick="addGuestbookEntry()">leave note ✦</button>
       </div>
-      <div id="verses-container"></div>
-      <!-- hidden admin trigger — tap 5× fast to reveal -->
-      <div id="admin-trigger" onclick="adminTap()">· · ·</div>
-      <div id="admin-panel">
-        <div id="admin-pw-wrap">
-          <input class="admin-input" id="admin-pw" type="password" placeholder="password" style="width:160px;text-align:center;letter-spacing:0.1em"/>
-          <button class="admin-btn" onclick="adminLogin()">unlock</button>
-        </div>
-        <div id="admin-pw-error">wrong password</div>
-        <div id="admin-form" style="display:none">
-          <div class="admin-label">new thought</div>
-          <textarea class="admin-textarea" id="admin-text" placeholder="write something..."></textarea>
-          <div class="admin-row">
-            <input class="admin-input" id="admin-date" type="date"/>
-            <button class="admin-btn" onclick="adminAdd()">add</button>
-          </div>
-          <div style="margin-top:10px;text-align:right">
-            <button class="admin-btn danger" onclick="adminLock()">lock panel</button>
-          </div>
-        </div>
-      </div>
+      <div id="guestbook-entries"></div>
     </div>
   </div>
 
@@ -593,7 +633,7 @@
         <div class="currently-row">
           <div class="currently-icon">🏠</div>
           <div>
-            <div class="currently-label">server</div>
+            <div class="currently-label">active on</div>
             <div class="currently-val" id="currently-server">loading...</div>
           </div>
         </div>
@@ -603,7 +643,7 @@
     <div class="about-block">
       <div class="section-label">things i love</div>
       <div class="about-interests">
-        <span class="about-interest"><span class="material-icons-round">edit</span> Unsaid Thoughts</span>
+        <span class="about-interest"><span class="material-icons-round">edit</span> Writing</span>
         <span class="about-interest"><span class="material-icons-round">music_note</span> Music</span>
         <span class="about-interest"><span class="material-icons-round">videogame_asset</span> Star Rail</span>
         <span class="about-interest"><span class="material-icons-round">sports_esports</span> Valorant</span>
@@ -621,8 +661,7 @@
   <button class="tab-btn"        onclick="showTab('about')"        id="btn-about"        title="about">       <span class="material-icons-round">person</span>            <span class="tab-label">about</span></button>
   <button class="tab-btn"        onclick="showTab('skills')"       id="btn-skills"       title="skills">      <span class="material-icons-round">settings</span>          <span class="tab-label">skills</span></button>
   <button class="tab-btn"        onclick="showTab('achievements')" id="btn-achievements" title="awards">      <span class="material-icons-round">emoji_events</span>      <span class="tab-label">awards</span></button>
-  <button class="tab-btn"        onclick="showTab('projects')"     id="btn-projects"     title="projects">    <span class="material-icons-round">folder_open</span>       <span class="tab-label">projects</span></button>
-  <button class="tab-btn"        onclick="showTab('verses')"       id="btn-verses"       title="thoughts">    <span class="material-icons-round">edit_note</span>         <span class="tab-label">thoughts</span></button>
+  <button class="tab-btn"        onclick="showTab('guestbook')"    id="btn-guestbook"    title="guestbook">   <span class="material-icons-round">auto_stories</span>      <span class="tab-label">guests</span></button>
   <button class="tab-btn"        onclick="showTab('contact')"      id="btn-contact"      title="contact">     <span class="material-icons-round">chat_bubble_outline</span><span class="tab-label">contact</span></button>
 </nav>
 
@@ -655,15 +694,14 @@
 
 <script>
 // ─────────────────────────────────────────────────────────
-// TAB NAVIGATION + PAGE TITLE
+// TAB NAVIGATION
 // ─────────────────────────────────────────────────────────
 const TAB_TITLES = {
   home:         'Zakuro',
   about:        'Zakuro · about',
   skills:       'Zakuro · skills',
   achievements: 'Zakuro · achievements',
-  projects:     'Zakuro · projects',
-  verses:       'Zakuro · unsaid thoughts',
+  guestbook:    'Zakuro · guestbook',
   contact:      'Zakuro · contact',
 };
 
@@ -679,13 +717,7 @@ function showTab(name) {
 // ─────────────────────────────────────────────────────────
 // LAST UPDATED LABEL
 // ─────────────────────────────────────────────────────────
-(function() {
-  const UPDATED = '2026-06-03';
-  const [y,m,d] = UPDATED.split('-').map(Number);
-  const months = ['jan','feb','mar','apr','may','jun','jul','aug','sep','oct','nov','dec'];
-  document.getElementById('last-updated-label').textContent =
-    'live via discord · refreshes every 30s';
-})();
+document.getElementById('last-updated-label').textContent = 'live via discord · refreshes every 30s';
 
 // ─────────────────────────────────────────────────────────
 // LANYARD — Discord presence
@@ -697,7 +729,6 @@ async function fetchLanyard() {
     const res = await fetch(`https://api.lanyard.rest/v1/users/${DISCORD_USER_ID}`);
     const { data } = await res.json();
 
-    // ── Discord status ──────────────────────────────────
     const statusEl = document.getElementById('currently-status');
     const statusMap = {
       online:  { label: 'online',              color: '#3ba55d' },
@@ -710,15 +741,8 @@ async function fetchLanyard() {
       statusEl.innerHTML = `<span style="display:inline-block;width:8px;height:8px;border-radius:50%;background:${s.color};margin-right:6px;vertical-align:middle;"></span>${s.label}`;
     }
 
-    // ── Active server (voice channel guild) ────────────
     const serverEl = document.getElementById('currently-server');
     if (serverEl) {
-      // type 4 = custom status, check activities for a guild_id presence
-      // Lanyard exposes active_on_discord_mobile / active_on_discord_desktop
-      // Best we can show: username + discriminator from the API
-      const username = data.discord_user?.username ?? null;
-      const globalName = data.discord_user?.global_name ?? username;
-      // Show which Discord they're active on
       const activeDesktop = data.active_on_discord_desktop;
       const activeMobile  = data.active_on_discord_mobile;
       const activeWeb     = data.active_on_discord_web;
@@ -749,118 +773,59 @@ fetchLanyard();
 setInterval(fetchLanyard, 30_000);
 
 // ─────────────────────────────────────────────────────────
-// VERSES — hardcoded base + localStorage extras
+// GUESTBOOK — localStorage
 // ─────────────────────────────────────────────────────────
-const BASE_VERSES = [
-  { text: "Who am I when no one is watching, when the mask falls and the performance ends? In the quiet, stripped of roles and reflections, what remains of me? And if even that feels unfamiliar — then who am I becoming?", date: "2026-03-03" },
-  { text: "If love is the most beautiful thing we can feel, why does it carry the power to destroy us?", date: "2026-03-19" },
-  { text: "Would I dare to know it all, even if that knowledge is the first step toward my own unraveling? What if the truth isn't meant to be understood, but endured — something that doesn't enlighten, only erases?", date: "2026-04-01" },
-  { text: "No. I let it rot the day I lost the love of my life. Whatever was left decayed quietly until there was nothing worth saving. Since then, everyone has reduced to passing shadows, empty noise in a world that never cared.", date: "2026-04-02" },
-  { text: "Take me into dreams so deep they swallow what remains of me — where silence erases my name, and even waking becomes a forgotten sin.", date: "2026-04-03" },
-  { text: "To hear someone scream my name again, to be held tightly and told that they will never let go. To be truly understood — to look into someone's eyes again without doubt, without waiting for the moment it all falls apart.", date: "2026-04-07" },
-  { text: "I don't look people in the eyes anymore — I only see the ways they will leave, the quiet countdown behind every smile, the expiration date stamped on everything that feels warm and good.", date: "2026-04-07" },
-  { text: "Every beautiful thing has only ever taught me how to grieve it. I am so tired of being the one left behind — of being the ellipsis at the end of someone else's story.", date: "2026-04-07" },
-];
-
-function loadExtraVerses() {
-  try { return JSON.parse(localStorage.getItem('zk_verses') || '[]'); }
+function loadGuestbook() {
+  try { return JSON.parse(localStorage.getItem('zk_guestbook') || '[]'); }
   catch { return []; }
 }
-function saveExtraVerses(arr) {
-  localStorage.setItem('zk_verses', JSON.stringify(arr));
+function saveGuestbook(arr) {
+  localStorage.setItem('zk_guestbook', JSON.stringify(arr));
 }
-
-function formatDate(iso) {
+function formatDateShort(iso) {
   const [y,m,d] = iso.split('-').map(Number);
   const months = ['jan','feb','mar','apr','may','jun','jul','aug','sep','oct','nov','dec'];
   return months[m-1] + ' ' + d + ', ' + y;
 }
-
-function renderVerses(adminMode) {
-  const extras = loadExtraVerses();
-  const all = [...BASE_VERSES, ...extras].sort((a,b) => a.date.localeCompare(b.date));
-  const c = document.getElementById('verses-container');
-  if (!all.length) {
-    c.innerHTML = '<p style="font-size:16px;color:var(--text-soft);font-style:italic;font-family:Cormorant Garamond,serif;padding:10px 0;">no unsaid thoughts yet.</p>';
+function renderGuestbook() {
+  const entries = loadGuestbook();
+  const container = document.getElementById('guestbook-entries');
+  if (!entries.length) {
+    container.innerHTML = '<div class="guestbook-empty">no entries yet — be the first! ✦</div>';
     return;
   }
-  c.innerHTML = all.map((v, i) => {
-    const isExtra = i >= BASE_VERSES.length;
-    const delBtn = (adminMode && isExtra)
-      ? `<button class="verse-delete-btn" onclick="adminDelete(${i - BASE_VERSES.length})">✕ remove</button>`
-      : '';
-    return `<div class="verse-card verse-card-admin">
-      <p class="verse-text">"${v.text}"</p>
-      <div class="verse-meta">${formatDate(v.date)}</div>
-      ${delBtn}
-    </div>`;
-  }).join('');
+  container.innerHTML = [...entries].reverse().map(e => `
+    <div class="guestbook-entry">
+      <div class="guestbook-entry-name">${escapeHtml(e.name)}</div>
+      <div class="guestbook-entry-msg">"${escapeHtml(e.msg)}"</div>
+      <div class="guestbook-entry-date">${formatDateShort(e.date)}</div>
+    </div>
+  `).join('');
 }
+function escapeHtml(str) {
+  return str.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+}
+function addGuestbookEntry() {
+  const name = document.getElementById('gb-name').value.trim();
+  const msg  = document.getElementById('gb-msg').value.trim();
+  if (!name || !msg) return;
+  const entries = loadGuestbook();
+  entries.push({ name, msg, date: new Date().toISOString().split('T')[0] });
+  saveGuestbook(entries);
+  document.getElementById('gb-name').value = '';
+  document.getElementById('gb-msg').value = '';
+  renderGuestbook();
+
+  // brief "sent!" flash on the button
+  const btn = document.querySelector('.guestbook-submit');
+  const orig = btn.textContent;
+  btn.textContent = 'noted ✓'; btn.style.background = 'rgba(59,165,93,0.18)';
+  setTimeout(() => { btn.textContent = orig; btn.style.background = ''; }, 2000);
+}
+renderGuestbook();
 
 // ─────────────────────────────────────────────────────────
-// VERSE ADMIN PANEL
-// ─────────────────────────────────────────────────────────
-const ADMIN_PASSWORD = 'zakuro2026';
-let adminUnlocked = false;
-let adminTapCount = 0;
-let adminTapTimer = null;
-
-function adminTap() {
-  adminTapCount++;
-  clearTimeout(adminTapTimer);
-  adminTapTimer = setTimeout(() => { adminTapCount = 0; }, 1200);
-  if (adminTapCount >= 5) {
-    adminTapCount = 0;
-    document.getElementById('admin-panel').classList.toggle('open');
-    if (!adminUnlocked) {
-      document.getElementById('admin-pw-wrap').style.display = 'flex';
-      document.getElementById('admin-form').style.display = 'none';
-      document.getElementById('admin-pw-error').style.display = 'none';
-    }
-  }
-}
-
-function adminLogin() {
-  const pw = document.getElementById('admin-pw').value;
-  if (pw === ADMIN_PASSWORD) {
-    adminUnlocked = true;
-    document.getElementById('admin-pw-wrap').style.display = 'none';
-    document.getElementById('admin-pw-error').style.display = 'none';
-    document.getElementById('admin-form').style.display = 'block';
-    document.getElementById('admin-date').value = new Date().toISOString().split('T')[0];
-    renderVerses(true);
-  } else {
-    document.getElementById('admin-pw-error').style.display = 'block';
-    document.getElementById('admin-pw').value = '';
-  }
-}
-
-function adminAdd() {
-  const text = document.getElementById('admin-text').value.trim();
-  const date = document.getElementById('admin-date').value;
-  if (!text || !date) return;
-  const extras = loadExtraVerses();
-  extras.push({ text, date });
-  saveExtraVerses(extras);
-  document.getElementById('admin-text').value = '';
-  renderVerses(true);
-}
-
-function adminDelete(idx) {
-  const extras = loadExtraVerses();
-  extras.splice(idx, 1);
-  saveExtraVerses(extras);
-  renderVerses(true);
-}
-
-function adminLock() {
-  adminUnlocked = false;
-  document.getElementById('admin-panel').classList.remove('open');
-  renderVerses(false);
-}
-
-// ─────────────────────────────────────────────────────────
-// VISITOR COUNTER — counterapi.dev (free countapi replacement)
+// VISITOR COUNTER
 // ─────────────────────────────────────────────────────────
 async function initVisitorCounter() {
   const el = document.getElementById('visitor-count');
@@ -874,13 +839,10 @@ async function initVisitorCounter() {
     const res = await fetch(url);
     const json = await res.json();
     const count = json.count ?? json.value ?? 0;
-    if (!localStorage.getItem(seenKey)) {
-      localStorage.setItem(seenKey, Date.now());
-    }
+    if (!localStorage.getItem(seenKey)) localStorage.setItem(seenKey, Date.now());
     animateCount(el, count);
   } catch { el.textContent = '—'; }
 }
-
 function animateCount(el, target) {
   const duration = 900, start = performance.now();
   function tick(now) {
@@ -953,7 +915,6 @@ audio.play()
 // ─────────────────────────────────────────────────────────
 // INIT
 // ─────────────────────────────────────────────────────────
-renderVerses(false);
 initVisitorCounter();
 </script>
 </body>
